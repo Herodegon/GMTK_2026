@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://ck5lenyq7mwgt"]
+
+[ext_resource type="Script" uid="uid://doj4mdl4jliu" path="res://scenes/player.gd" id="1_3vyb7"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_yt6rh"]
+size = Vector3(0.3, 0.3, 0.3)
+
+[node name="Player" type="Node3D" unique_id=390882609]
+script = ExtResource("1_3vyb7")
+
+[node name="Hand" type="CSGMesh3D" parent="." unique_id=1179203605]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6171726, -0.36102962, -0.53881514)
+mesh = SubResource("BoxMesh_yt6rh")
+
+[node name="Camera" type="Camera3D" parent="." unique_id=1721382717]
+
+[node name="Position1" type="Node3D" parent="." unique_id=1705405695]
+
+[node name="Position2" type="Node3D" parent="." unique_id=567510098]
+transform = Transform3D(0.9999999, 0, 0, 0, 0.70710677, 0.7071067, 0, -0.7071067, 0.70710665, 0, -0.18551743, 0.58241904)

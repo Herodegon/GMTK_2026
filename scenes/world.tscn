@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://bc12fhlv6oogj"]
+
+[ext_resource type="PackedScene" uid="uid://ck5lenyq7mwgt" path="res://scenes/player.tscn" id="1_nnsk1"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rwgxs"]
+
+[sub_resource type="Sky" id="Sky_nnsk1"]
+sky_material = SubResource("ProceduralSkyMaterial_rwgxs")
+
+[sub_resource type="Environment" id="Environment_wnsco"]
+background_mode = 2
+sky = SubResource("Sky_nnsk1")
+
+[node name="World" type="Node3D" unique_id=803202408]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1598877520]
+environment = SubResource("Environment_wnsco")
+
+[node name="Sun" type="DirectionalLight3D" parent="." unique_id=1065809548]
+transform = Transform3D(0.70710677, 0.68301266, -0.18301272, 0, 0.25881907, 0.9659258, 0.70710677, -0.68301266, 0.18301272, 0, 0, 0)
+
+[node name="Player" parent="." unique_id=390882609 instance=ExtResource("1_nnsk1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
