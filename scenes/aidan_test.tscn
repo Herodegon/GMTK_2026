@@ -28,5 +28,5 @@ environment = SubResource("Environment_a8ock")
 transform = Transform3D(-0.45209804, 0.86157525, -0.23085842, 1.8333646e-09, 0.2588191, 0.9659258, 0.89196813, 0.43669328, -0.11701165, 0, 0, 0)
 
 [node name="CSGMesh3D" type="CSGMesh3D" parent="." unique_id=1522238502]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4873887, -0.72860885, 0.13234782)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4721475, -0.76116514, 0.16694465)
 mesh = SubResource("BoxMesh_t2dwb")
