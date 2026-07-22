@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://bc12fhlv6oogj"]
 
 [ext_resource type="PackedScene" uid="uid://ck5lenyq7mwgt" path="res://scenes/player.tscn" id="1_nnsk1"]
+[ext_resource type="Shader" uid="uid://dk3sqrori0yc6" path="res://assets/shaders/water_shader.gdshader" id="2_rwgxs"]
+[ext_resource type="Texture2D" uid="uid://tlcvb4dk52vw" path="res://assets/sprites/44_128x128.png" id="3_4wyf3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rwgxs"]
 
@@ -11,11 +13,27 @@ sky_material = SubResource("ProceduralSkyMaterial_rwgxs")
 background_mode = 2
 sky = SubResource("Sky_nnsk1")
 
-[sub_resource type="BoxMesh" id="BoxMesh_wnsco"]
-size = Vector3(30, 0.1, 30)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m2va7"]
+render_priority = 0
+shader = ExtResource("2_rwgxs")
+shader_parameter/albedo = Color(0.8509804, 0.8509804, 0.8509804, 1)
+shader_parameter/water_texture1 = ExtResource("3_4wyf3")
+shader_parameter/water_texture2 = ExtResource("3_4wyf3")
+shader_parameter/scroll_speed1 = Vector2(0.05, 0)
+shader_parameter/scroll_speed2 = Vector2(-0.03, 0)
+shader_parameter/blend_factor = 0.5
+shader_parameter/scale1 = Vector2(1, 1)
+shader_parameter/scale2 = Vector2(1, 1)
+shader_parameter/wave_strength = 1.0
+shader_parameter/wave_scale = 0.02
+shader_parameter/pixelation_level = 64
+shader_parameter/FoamSize = 0.5
+shader_parameter/WaterOpacity = 1.0
+shader_parameter/FoamGlowIntensity = 0.5
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rwgxs"]
-albedo_color = Color(0.36078432, 0.70980394, 1, 1)
+[sub_resource type="BoxMesh" id="BoxMesh_wnsco"]
+material = SubResource("ShaderMaterial_m2va7")
+size = Vector3(30, 0.1, 30)
 
 [sub_resource type="BoxMesh" id="BoxMesh_4wyf3"]
 size = Vector3(30, 0.1, 10)
@@ -35,9 +53,8 @@ transform = Transform3D(-0.45209804, 0.86157525, -0.23085842, 1.8333646e-09, 0.2
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="Water" type="CSGMesh3D" parent="." unique_id=854924027]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.3767662, -9.771616)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.738, -2.409, -13.021)
 mesh = SubResource("BoxMesh_wnsco")
-material = SubResource("StandardMaterial3D_rwgxs")
 
 [node name="Ground" type="CSGMesh3D" parent="." unique_id=1403417302]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9878943, 1.0382786)
