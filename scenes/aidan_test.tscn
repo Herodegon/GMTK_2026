@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://cjeutevjk4cmr"]
+
+[ext_resource type="PackedScene" uid="uid://s4qt08baqykk" path="res://scenes/radio.tscn" id="1_xeeac"]
+[ext_resource type="PackedScene" uid="uid://ck5lenyq7mwgt" path="res://scenes/player.tscn" id="2_a8ock"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_xeeac"]
+
+[sub_resource type="Sky" id="Sky_nnsk1"]
+sky_material = SubResource("ProceduralSkyMaterial_xeeac")
+
+[sub_resource type="Environment" id="Environment_a8ock"]
+background_mode = 2
+sky = SubResource("Sky_nnsk1")
+
+[sub_resource type="BoxMesh" id="BoxMesh_t2dwb"]
+
+[node name="aidan_test" type="Node3D" unique_id=1846892741]
+
+[node name="radio" parent="." unique_id=221357753 instance=ExtResource("1_xeeac")]
+transform = Transform3D(0.10020669, 0, 0.27213714, 0, 0.29, 0, -0.27213714, 0, 0.10020669, -1.3088833, -0.22203678, 0.23548913)
+
+[node name="Player" parent="." unique_id=390882609 instance=ExtResource("2_a8ock")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=802838203]
+environment = SubResource("Environment_a8ock")
+
+[node name="Sun" type="DirectionalLight3D" parent="." unique_id=655558303]
+transform = Transform3D(-0.45209804, 0.86157525, -0.23085842, 1.8333646e-09, 0.2588191, 0.9659258, 0.89196813, 0.43669328, -0.11701165, 0, 0, 0)
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="." unique_id=1522238502]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4873887, -0.72860885, 0.13234782)
+mesh = SubResource("BoxMesh_t2dwb")

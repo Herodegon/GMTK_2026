@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://s4qt08baqykk"]
+
+[ext_resource type="PackedScene" uid="uid://7yxwr8hy125q" path="res://assets/models/Radio.fbx" id="1_y83x7"]
+
+[node name="radio" unique_id=221357753 instance=ExtResource("1_y83x7")]
