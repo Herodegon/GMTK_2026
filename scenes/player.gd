@@ -1,12 +1,14 @@
 extends Node3D
 
+@onready var rod := $Rod
+
 var target_transform: Transform3D
 var camera_lock: bool = false
 
 func _physics_process(delta):
 	
 	if Input.is_action_just_pressed("interact"):
-		$Rod/Animator.play("Cast")
+		rod.cast_rod()
 	
 	if !camera_lock:
 		handle_camera()

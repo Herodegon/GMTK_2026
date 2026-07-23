@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" uid="uid://c2oqyflujm2xb" path="res://scripts/rod_line.gd" id="1_k332f"]
 
-[sub_resource type="Curve3D" id="Curve3D_k332f"]
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_k332f"]
 
 [node name="RodLine" type="Node3D" unique_id=914424710]
 script = ExtResource("1_k332f")
 
-[node name="Path3D" type="Path3D" parent="." unique_id=516256542]
-curve = SubResource("Curve3D_k332f")
+[node name="LineMesh" type="MeshInstance3D" parent="." unique_id=390288212]
+mesh = SubResource("ImmediateMesh_k332f")
