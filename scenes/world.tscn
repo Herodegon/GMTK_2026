@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://ck5lenyq7mwgt" path="res://scenes/player.tscn" id="1_nnsk1"]
 [ext_resource type="Shader" uid="uid://dk3sqrori0yc6" path="res://assets/shaders/water_shader.gdshader" id="2_rwgxs"]
 [ext_resource type="Texture2D" uid="uid://ektiiam2i606" path="res://assets/sprites/44_1024x1024.png" id="3_4wyf3"]
+[ext_resource type="PackedScene" uid="uid://cvmxuyikecdj0" path="res://assets/models/lake_dock.glb" id="4_k0juu"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rwgxs"]
 
@@ -24,8 +25,8 @@ shader_parameter/scroll_speed2 = Vector2(-0.03, 0)
 shader_parameter/blend_factor = 0.5
 shader_parameter/scale1 = Vector2(5, 5)
 shader_parameter/scale2 = Vector2(5, 5)
-shader_parameter/wave_strength = 1.0
-shader_parameter/wave_scale = 0.02
+shader_parameter/wave_strength = 0.25
+shader_parameter/wave_scale = 0.01
 shader_parameter/pixelation_level = 64
 shader_parameter/FoamSize = 0.5
 shader_parameter/WaterOpacity = 1.0
@@ -53,10 +54,14 @@ transform = Transform3D(-0.45209804, 0.86157525, -0.23085842, 1.8333646e-09, 0.2
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="Water" type="CSGMesh3D" parent="." unique_id=854924027]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.738, -2.409, -13.021)
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, -0.738, -3.3451324, -30.227673)
 mesh = SubResource("BoxMesh_wnsco")
 
 [node name="Ground" type="CSGMesh3D" parent="." unique_id=1403417302]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9878943, 1.0382786)
+visible = false
 mesh = SubResource("BoxMesh_4wyf3")
 material = SubResource("StandardMaterial3D_nnsk1")
+
+[node name="lake_dock" parent="." unique_id=1396140080 instance=ExtResource("4_k0juu")]
+transform = Transform3D(-8.742278e-07, 0, 20, 0, 20, 0, -20, 0, -8.742278e-07, -0.3551669, -9.19143, -12.355739)
