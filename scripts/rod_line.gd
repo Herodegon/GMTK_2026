@@ -18,7 +18,7 @@ extends Node3D
 var position_list: PackedVector3Array = PackedVector3Array()
 var prev_position_list: PackedVector3Array = PackedVector3Array()
 
-var render_line: bool = false
+var render_line: bool = true
 
 func _ready() -> void:
     position_list.resize(int(rope_length / constraint))

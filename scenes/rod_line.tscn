@@ -2,29 +2,10 @@
 
 [ext_resource type="Script" uid="uid://c2oqyflujm2xb" path="res://scripts/rod_line.gd" id="1_k332f"]
 
-[sub_resource type="SphereMesh" id="SphereMesh_bssgg"]
-radius = 0.05
-height = 0.1
-radial_segments = 8
-rings = 4
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_bssgg"]
-radius = 0.05
-
 [sub_resource type="Curve3D" id="Curve3D_k332f"]
 
-[node name="RodLine" type="Node3D" unique_id=914424710 node_paths=PackedStringArray("bob_node", "target_node")]
+[node name="RodLine" type="Node3D" unique_id=914424710]
 script = ExtResource("1_k332f")
-bob_node = NodePath("RodBob")
-target_node = NodePath("RodBob")
-
-[node name="RodBob" type="RigidBody3D" parent="." unique_id=889233571]
-
-[node name="CSGMesh3D" type="CSGMesh3D" parent="RodBob" unique_id=880937314]
-mesh = SubResource("SphereMesh_bssgg")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RodBob" unique_id=630085182]
-shape = SubResource("SphereShape3D_bssgg")
 
 [node name="Path3D" type="Path3D" parent="." unique_id=516256542]
 curve = SubResource("Curve3D_k332f")

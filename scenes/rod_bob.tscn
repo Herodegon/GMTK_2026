@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://bjuuk5q0ofye7"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_nevuf"]
+radius = 0.05
+height = 0.1
+radial_segments = 8
+rings = 4
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_eqcmi"]
+radius = 0.05
+
+[node name="RodBob" type="RigidBody3D" unique_id=402140256]
+mass = 0.3
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="." unique_id=1615397033]
+mesh = SubResource("SphereMesh_nevuf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2083414487]
+shape = SubResource("SphereShape3D_eqcmi")
