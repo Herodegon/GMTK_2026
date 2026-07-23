@@ -39,12 +39,17 @@ func _input(event):
 				interaction = interactions.BEER
 
 func interact():
+	# Node communication handled by EventBus.
+	# Define interaction signal in EventBus (EventBus.signal_name.emit(args))
+	# Connect interaction signal in interacted object (EventBus.signal_name.connect(method_name))
+	
 	match interaction:
 		0:
 			print("fish")
 			$Rod/Animator.play("Cast")
 		1:
 			print("radio")
+			EventBus.radio_interact.emit()
 		2:
 			print("beer")
 		3:

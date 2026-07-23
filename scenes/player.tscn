@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ck5lenyq7mwgt"]
 
-[ext_resource type="Script" uid="uid://doj4mdl4jliu" path="res://scenes/player.gd" id="1_3vyb7"]
+[ext_resource type="Script" uid="uid://doj4mdl4jliu" path="res://scripts/player.gd" id="1_3vyb7"]
+[ext_resource type="PackedScene" uid="uid://ds24jj5mpm8dx" path="res://assets/models/rod.fbx" id="2_g2els"]
 
 [sub_resource type="Animation" id="Animation_3vyb7"]
 resource_name = "Cast"
@@ -80,7 +81,11 @@ libraries/ = SubResource("AnimationLibrary_qhqgy")
 
 [node name="Mesh" type="CSGMesh3D" parent="Rod" unique_id=1179203605]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+visible = false
 mesh = SubResource("BoxMesh_yt6rh")
+
+[node name="rod" parent="Rod" unique_id=863158693 instance=ExtResource("2_g2els")]
+transform = Transform3D(-1.0927847e-08, 0, 0.25, 0, 0.25, 0, -0.25, 0, -1.0927847e-08, 0, 0, 0)
 
 [node name="Camera" type="Camera3D" parent="." unique_id=1721382717]
 unique_name_in_owner = true
