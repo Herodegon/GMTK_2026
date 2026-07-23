@@ -25,10 +25,6 @@ func _ready() -> void:
 	rod_line.set_rope_length(rest_rope_length)
 	_bob_set_rest()
 
-func _process(delta: float) -> void:
-	if is_cast:
-		_spin_wheel(delta, reel_direction)
-
 func _bob_set_rest() -> void:
 	bob.global_position = bob_start_position.global_position
 	bob.freeze = true
@@ -38,13 +34,14 @@ func _spin_wheel(delta: float, direction: RotationDirection) -> void:
 	wheel_mesh.quaternion = wheel_mesh.quaternion * delta_q
 
 func cast_rod() -> void:
-	if !is_cast:
+	if not bob.is_cast:
 		$Animator.play("Cast")
 
 func _animation_call_cast() -> void:
-	is_cast = true
-
 	bob.apply_central_force(cast_direction.normalized() * cast_force)
 	bob.freeze = false
+	bob.is_cast = true
+
 	rod_line.set_rope_length(cast_rope_length)
 	reel_direction = RotationDirection.CLOCKWISE
+	_spin_wheel(spin_speed, reel_direction)

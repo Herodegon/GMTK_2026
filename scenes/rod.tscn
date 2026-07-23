@@ -103,6 +103,8 @@ radial_segments = 8
 
 [node name="Rod" type="Node3D" unique_id=1205497278]
 script = ExtResource("1_7w65j")
+cast_rope_length = 12.0
+cast_force = 65.0
 
 [node name="Animator" type="AnimationPlayer" parent="." unique_id=654001140]
 libraries/ = SubResource("AnimationLibrary_2kija")
@@ -110,10 +112,11 @@ libraries/ = SubResource("AnimationLibrary_2kija")
 [node name="RodLine" parent="." unique_id=914424710 node_paths=PackedStringArray("start_node", "target_node") instance=ExtResource("2_vf8jx")]
 start_node = NodePath("../Mesh/RodMesh/LineStart")
 target_node = NodePath("../BobRestNode/RodBob")
+constraint_iterations = 3
+payout_speed = 24.0
 
 [node name="Mesh" type="Node3D" parent="." unique_id=1259353559]
 transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0.6071543, -0.5783014, -0.5725271)
-metadata/_edit_group_ = true
 
 [node name="RodMesh" type="CSGMesh3D" parent="Mesh" unique_id=259422168]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)

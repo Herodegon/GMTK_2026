@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://bb1xamginjy27"]
+
+[ext_resource type="Script" uid="uid://caxggu3848ydl" path="res://scripts/fish.gd" id="1_n6yr6"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bssgg"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_bssgg"]
+radius = 0.15
+height = 0.7
+radial_segments = 8
+rings = 4
+
+[node name="Fish" type="RigidBody3D" unique_id=889686]
+script = ExtResource("1_n6yr6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1054717601]
+transform = Transform3D(0.4, 0, 0, 0, -1.7484556e-08, -0.4, 0, 0.4, -1.7484556e-08, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_bssgg")
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="." unique_id=11634783]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_bssgg")

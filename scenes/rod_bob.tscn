@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://bjuuk5q0ofye7"]
 
+[ext_resource type="Script" uid="uid://dfxbhdbmdrtkb" path="res://scripts/rod_bob.gd" id="1_eqcmi"]
+
 [sub_resource type="SphereMesh" id="SphereMesh_nevuf"]
 radius = 0.05
 height = 0.1
@@ -9,8 +11,12 @@ rings = 4
 [sub_resource type="SphereShape3D" id="SphereShape3D_eqcmi"]
 radius = 0.05
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_bssgg"]
+radius = 0.1
+
 [node name="RodBob" type="RigidBody3D" unique_id=402140256]
 mass = 0.1
+script = ExtResource("1_eqcmi")
 
 [node name="CSGMesh3D" type="CSGMesh3D" parent="." unique_id=1615397033]
 mesh = SubResource("SphereMesh_nevuf")
@@ -18,5 +24,6 @@ mesh = SubResource("SphereMesh_nevuf")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2083414487]
 shape = SubResource("SphereShape3D_eqcmi")
 
-[node name="RayCast3D" type="RayCast3D" parent="." unique_id=631824104]
-target_position = Vector3(0, -0.01, 0)
+[node name="ShapeCast3D" type="ShapeCast3D" parent="." unique_id=388795374]
+shape = SubResource("SphereShape3D_bssgg")
+target_position = Vector3(0, 0, 0)

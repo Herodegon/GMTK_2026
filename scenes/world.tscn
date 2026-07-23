@@ -33,7 +33,7 @@ shader_parameter/FoamGlowIntensity = 0.5
 
 [sub_resource type="BoxMesh" id="BoxMesh_wnsco"]
 material = SubResource("ShaderMaterial_m2va7")
-size = Vector3(30, 0.1, 30)
+size = Vector3(31, 0.1, 31)
 
 [sub_resource type="BoxMesh" id="BoxMesh_4wyf3"]
 size = Vector3(30, 0.1, 10)
@@ -53,7 +53,8 @@ transform = Transform3D(-0.45209804, 0.86157525, -0.23085842, 1.8333646e-09, 0.2
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="Water" type="CSGMesh3D" parent="." unique_id=854924027]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.738, -2.409, -13.021)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, -15.5)
+use_collision = true
 mesh = SubResource("BoxMesh_wnsco")
 
 [node name="Ground" type="CSGMesh3D" parent="." unique_id=1403417302]
