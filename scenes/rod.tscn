@@ -1,0 +1,117 @@
+[gd_scene format=3 uid="uid://c585i7nr6pwh"]
+
+[ext_resource type="Script" uid="uid://d3safe7q4nrg4" path="res://scripts/rod.gd" id="1_7w65j"]
+[ext_resource type="PackedScene" uid="uid://qhoexvap4umh" path="res://scenes/rod_line.tscn" id="2_vf8jx"]
+
+[sub_resource type="Animation" id="Animation_3vyb7"]
+resource_name = "Cast"
+length = 2.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mesh:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6, 0.9, 1.1, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.6071543, -0.5783014, -0.5725271), Vector3(0.6071543, -0.5783014, -0.3338139), Vector3(0.6071543, -0.5783014, -0.3338139), Vector3(0.6071543, -0.65435684, -0.9711827), Vector3(0.6071543, -0.5783014, -0.5725271)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Mesh:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6, 0.9, 1.1, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.5235988, 0, 0), Vector3(0.5235988, 0, 0), Vector3(0.5235988, 0, 0), Vector3(-0.9987162, 0, 0), Vector3(-1.0471976, 0, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_animation_cast_rod"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_g2els"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mesh:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.5235988, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Mesh:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.6071543, -0.5783014, -0.5725271)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2kija"]
+_data = {
+&"Cast": SubResource("Animation_3vyb7"),
+&"RESET": SubResource("Animation_g2els")
+}
+
+[sub_resource type="BoxMesh" id="BoxMesh_7w65j"]
+size = Vector3(0.1, 1, 0.1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_bssgg"]
+top_radius = 0.1
+bottom_radius = 0.1
+height = 0.2
+radial_segments = 8
+
+[node name="Rod" type="Node3D" unique_id=1205497278]
+script = ExtResource("1_7w65j")
+
+[node name="Animator" type="AnimationPlayer" parent="." unique_id=654001140]
+libraries/ = SubResource("AnimationLibrary_2kija")
+
+[node name="BobRestNode" type="Node3D" parent="." unique_id=1021830666]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6071543, -0.086815834, -1.0981238)
+
+[node name="RodLine" parent="." unique_id=914424710 node_paths=PackedStringArray("start_node") instance=ExtResource("2_vf8jx")]
+start_node = NodePath("../BobRestNode")
+
+[node name="LineStart" type="Node3D" parent="." unique_id=1869645065]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6071543, 0.2838049, -1.071871)
+
+[node name="Mesh" type="Node3D" parent="." unique_id=1259353559]
+transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0.6071543, -0.5783014, -0.5725271)
+metadata/_edit_group_ = true
+
+[node name="RodMesh" type="CSGMesh3D" parent="Mesh" unique_id=259422168]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("BoxMesh_7w65j")
+
+[node name="WheelMesh" type="CSGMesh3D" parent="Mesh/RodMesh" unique_id=1697062251]
+transform = Transform3D(-4.371139e-08, -1, 4.371139e-08, 0, -4.371139e-08, -1, 1, -4.371139e-08, 1.9106855e-15, 0, -0.1, -0.1)
+rotation_edit_mode = 1
+mesh = SubResource("CylinderMesh_bssgg")

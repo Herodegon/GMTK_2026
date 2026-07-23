@@ -1,86 +1,10 @@
 [gd_scene format=3 uid="uid://ck5lenyq7mwgt"]
 
 [ext_resource type="Script" uid="uid://doj4mdl4jliu" path="res://scenes/player.gd" id="1_3vyb7"]
-
-[sub_resource type="Animation" id="Animation_3vyb7"]
-resource_name = "Cast"
-length = 2.0
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Rod:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.6, 0.9, 1.1, 2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0.6071543, -0.5783014, -0.5725271), Vector3(0.6071543, -0.5783014, -0.3338139), Vector3(0.6071543, -0.5783014, -0.3338139), Vector3(0.6071543, -0.65435684, -0.9711827), Vector3(0.6071543, -0.5783014, -0.5725271)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Rod:rotation")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.6, 0.9, 1.1, 2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(-0.5235988, 0, 0), Vector3(0.5235988, 0, 0), Vector3(0.5235988, 0, 0), Vector3(-0.9987162, 0, 0), Vector3(-0.5235988, 0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_g2els"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Rod:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(-0.5235988, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Rod:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0.6071543, -0.5783014, -0.5725271)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_qhqgy"]
-_data = {
-&"Cast": SubResource("Animation_3vyb7"),
-&"RESET": SubResource("Animation_g2els")
-}
-
-[sub_resource type="BoxMesh" id="BoxMesh_yt6rh"]
-size = Vector3(0.1, 1, 0.1)
+[ext_resource type="PackedScene" uid="uid://c585i7nr6pwh" path="res://scenes/rod.tscn" id="2_g2els"]
 
 [node name="Player" type="Node3D" unique_id=390882609]
 script = ExtResource("1_3vyb7")
-
-[node name="Rod" type="Node3D" parent="." unique_id=272572645]
-transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0.6071543, -0.5783014, -0.5725271)
-metadata/_edit_group_ = true
-
-[node name="Animator" type="AnimationPlayer" parent="Rod" unique_id=1129065426]
-root_node = NodePath("../..")
-libraries/ = SubResource("AnimationLibrary_qhqgy")
-
-[node name="Mesh" type="CSGMesh3D" parent="Rod" unique_id=1179203605]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("BoxMesh_yt6rh")
 
 [node name="Camera" type="Camera3D" parent="." unique_id=1721382717]
 
@@ -94,3 +18,5 @@ transform = Transform3D(0.4999999, -0.6123724, 0.61237234, 0, 0.70710677, 0.7071
 
 [node name="Right" type="Node3D" parent="." unique_id=1485090676]
 transform = Transform3D(0.4999999, 0.6123724, -0.61237234, 0, 0.7071067, 0.70710665, 0.8660253, -0.35355332, 0.3535533, 0, 0, 0)
+
+[node name="Rod" parent="." unique_id=1205497278 instance=ExtResource("2_g2els")]
