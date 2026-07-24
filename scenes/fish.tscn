@@ -14,8 +14,9 @@ rings = 4
 collision_mask = 2
 mass = 0.5
 gravity_scale = 0.0
-linear_damp = 0.2
 script = ExtResource("1_n6yr6")
+tether_radius = 10.0
+friction = 0.2
 max_swim_cooldown = 4.0
 
 [node name="CSGMesh3D" type="CSGMesh3D" parent="." unique_id=11634783]

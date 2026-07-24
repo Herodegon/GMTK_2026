@@ -12,6 +12,7 @@ enum SwimState {
 @export_group("Swim Settings")
 @export var impulse_strength: float = 1.0
 @export var turn_speed: float = 0.3
+@export var friction: float = 0.1
 @export var max_swim_cooldown: float = 3.0
 
 var target_point: Vector3 = Vector3.ZERO
@@ -25,13 +26,13 @@ func _physics_process(delta: float) -> void:
 			swim_cooldown -= delta
 			if target_point == Vector3.ZERO or global_position.distance_to(target_point) < 0.1 or swim_cooldown <= 0.0:
 				target_point = _get_point_near_tether()
-				velocity = impulse_strength * randf_range(0.25, 1.0)
+				velocity = impulse_strength * randf_range(0.15, 1.0)
 				swim_cooldown = randf_range(1.0, max_swim_cooldown)
 			_look_at_target(target_point, delta)
 			var to_target := target_point - global_position
 			to_target.y = 0.0
 			move_and_collide(to_target.normalized() * velocity * delta)
-	print(global_position)
+			velocity = lerp(velocity, 0.0, friction * delta)
 
 func _get_point_near_tether() -> Vector3:
 	var random_angle = randf_range(0.0, TAU)

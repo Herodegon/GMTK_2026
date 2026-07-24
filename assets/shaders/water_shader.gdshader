@@ -1,55 +1,158 @@
+// this code working on godot 4.3
 shader_type spatial;
-render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+render_mode cull_disabled; // specular_schlick_ggx
 
-uniform vec3 albedo : source_color;
-uniform sampler2D water_texture1;
-uniform sampler2D water_texture2;
-uniform sampler2D noise_texture;
-uniform vec2 scroll_speed1 = vec2(0.05, 0.0);
-uniform vec2 scroll_speed2 = vec2(-0.03, 0.0);
-uniform float blend_factor = 0.5;
-uniform vec2 scale1 = vec2(1.0, 1.0);
-uniform vec2 scale2 = vec2(1.0, 1.0);
-uniform float wave_strength = 1.0;
-uniform float wave_scale = 0.02;
-uniform int pixelation_level = 64;
-uniform float FoamSize = 0.5;
-uniform sampler2D DepthTexture : hint_depth_texture; 
-uniform float WaterOpacity = 1.0;
-uniform float FoamGlowIntensity = 0.5;
+//Water Color
+uniform vec4 color : source_color;
+uniform vec4 deep_water: source_color;
+
+uniform float roughness : hint_range(0.0, 1.0) = 0.1;
+uniform float metallic : hint_range(0.0, 1.0) = 0;
+
+//Water Speed
+uniform float speed: hint_range(-1, 1) = 0.02;
+
+
+uniform sampler2D DEPTH_TEXTURE : hint_depth_texture, filter_linear_mipmap;
+uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
+
+
+
+//depth-fade 
+uniform float beer_law_factor = 2.0;
+uniform float _distance = 50.0;
+
+//Water foam 
+uniform vec4 edge_color: source_color;
+uniform float edge_scale = 0.1;
+uniform float near = 0.1;
+uniform float far = 100.0;
+
+//Water Wave 
+uniform vec2 wave_direction = vec2(2.0,0.0); // Direction of wave 1
+uniform vec2 wave_direction2 = vec2(0.0,1.0); // Direction of wave 2
+uniform float time_scale : hint_range(0.0, 0.2, 0.005) = 0.025; // Rate of movement multiplied by TIME
+uniform float height_scale = 0.15;
+uniform float noise_scale = 10.0;
+
+// Water Noise
+uniform sampler2D noise1;
+uniform sampler2D noise2;
+uniform sampler2D wave;
+uniform sampler2D normalmap: hint_normal;
+
+// Varying variables
+varying float height;
+varying vec3 world_pos;
+
+
+
+float fresnel(float amount, vec3 normal, vec3 view)
+{
+	return pow((1.0 - clamp(dot(normalize(normal), normalize(view)), 0.0, 1.0 )), amount);
+}
+
+
+
+float rim(float depth) {
+	depth = 2.0 * depth - 1.0;
+	return near * far / (far + depth * (near - far));
+}
+
+float calc_depth_fade(float depth, mat4 projection_matrix, 
+						vec4 fragcoord, float beer_factor, float __distance, vec3 vertex) {
+	
+	float scene_depth = depth;
+
+	scene_depth = scene_depth * 2.0 - 1.0;
+	scene_depth = projection_matrix[3][2] / (scene_depth + projection_matrix[2][2]);
+	scene_depth = scene_depth + vertex.z; // z is negative
+	
+	// application of beers law
+	scene_depth = exp(-scene_depth * beer_factor);
+	
+	float screen_depth = fragcoord.z;
+	
+	float depth_fade = (scene_depth - screen_depth) / __distance;
+	
+	depth_fade = clamp(depth_fade, 0.0, 1.0);
+	
+	return depth_fade;
+}
+
 
 void vertex() {
-    vec2 global_position = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xz;
-    float noise_value = texture(noise_texture, global_position * wave_scale).r;
-    float wave = sin(global_position.x * 0.2 + global_position.y * 0.2 + TIME + noise_value * 10.0) * wave_strength;
-    VERTEX.y += wave;
+	world_pos = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
+	
+	height = texture(wave, world_pos.xz / noise_scale + TIME * time_scale).r;
+	
+	VERTEX.y += height * height_scale;
 }
 
 void fragment() {
-    vec2 scaledUV1 = UV * scale1;
-    vec2 scaledUV2 = UV * scale2;
-    vec2 scrolledUV1 = scaledUV1 + scroll_speed1 * TIME;
-    vec2 scrolledUV2 = scaledUV2 + scroll_speed2 * TIME;
-    scrolledUV1 = mod(scrolledUV1, vec2(1.0, 1.0));
-    scrolledUV2 = mod(scrolledUV2, vec2(1.0, 1.0));
-    scrolledUV1 = floor(scrolledUV1 * float(pixelation_level)) / float(pixelation_level);
-    scrolledUV2 = floor(scrolledUV2 * float(pixelation_level)) / float(pixelation_level);
-
-    vec4 water_color1 = texture(water_texture1, scrolledUV1);
-    vec4 water_color2 = texture(water_texture2, scrolledUV2);
-    vec4 blended_water_color = mix(water_color1, water_color2, blend_factor);
-
-    float depthValue = texture(DepthTexture, SCREEN_UV).r;
-    vec4 worldPosition = INV_PROJECTION_MATRIX * vec4(SCREEN_UV * 2.0 - 1.0, depthValue, 1.0);
-    worldPosition.xyz /= worldPosition.w;
-    float foamEffect = clamp(1.0 - smoothstep(worldPosition.z + FoamSize, worldPosition.z, VERTEX.z), 0.0, 1.0);
-    float foamOpacity = 1.0 - foamEffect;
-    float foamEffectRounded = round(foamOpacity);
-    float finalOpacity = foamEffectRounded + WaterOpacity;
+	float time = TIME * speed;
 	
-    ALBEDO = blended_water_color.rgb * albedo;
-    ALPHA = finalOpacity;
-    EMISSION = vec3(foamEffectRounded) * FoamGlowIntensity;
-    METALLIC = 0.0;
-    ROUGHNESS = 1.0;
+	vec3 n1 = texture(noise1, UV + time).rgb;
+	
+	vec3 n2 = texture(noise2, UV - time * 0.2).rgb;
+	
+	vec2 uv_movement = UV * 4.0;
+	uv_movement += TIME * speed * 4.0;
+	
+	float sum = (n1.r + n2.r) - 1.0;
+	
+	float z_depth = rim(texture(DEPTH_TEXTURE, SCREEN_UV).x);
+	
+	float z_pos = rim(FRAGCOORD.z);
+	
+	float diff = z_depth - z_pos;
+	
+	// depth-fade
+	float z_depth_fade = calc_depth_fade(texture(DEPTH_TEXTURE, SCREEN_UV).x, PROJECTION_MATRIX, FRAGCOORD, beer_law_factor, _distance, VERTEX);
+	
+	float z_fade = rim(FRAGCOORD.z);
+	
+	float fade_diff = z_depth_fade - z_fade;
+	
+	vec4 gradientcolor = mix(color, deep_water, z_depth_fade);
+	
+	//If enable this line 119-120, it can caused bug for edge effect
+	vec2 displacement = vec2(sum * 0.01);
+	diff += displacement.x * 15.0;
+	
+	vec4 depth_color_adj = mix(edge_color, gradientcolor, step(edge_scale, diff));
+	
+	vec4 alpha = texture(SCREEN_TEXTURE, SCREEN_UV + displacement);
+
+	// Calculate Fresnel
+	float fresnel = fresnel(2.0, NORMAL, VIEW);
+
+	//vec4 surface_color = mix(color, deep_water, fresnel);
+	
+	float fin = 0.0;
+	if (sum > 0.0 && sum < 0.4) fin = 0.1;
+	if (sum > 0.4 && sum < 0.8) fin = 0.0;
+	if (sum > 0.8) fin = 1.0;
+	
+	// konvertier fin in vec3 um
+	//ALBEDO = vec3(fin) + mix(alpha.rgb, (surface_color + depth_color_adj).rgb, gradientcolor.a);
+	
+	ALBEDO = vec3(fin) + mix(alpha.rgb, gradientcolor.rgb, gradientcolor.a);
+	
+	float depth = texture(DEPTH_TEXTURE, SCREEN_UV).r;
+	
+	vec4 upos = INV_PROJECTION_MATRIX * vec4(SCREEN_UV * 2.0 - 1.0, depth, 1.0);
+	
+	vec3 pixel_position = upos.xyz / upos.w;
+    
+	// Adjust the edge foam calculation to include edge_scale
+	if (VERTEX.z < pixel_position.z + 0.05 + edge_scale) {
+  		ALBEDO = vec3(edge_color.rgb);
+	}
+	
+	NORMAL_MAP = texture(normalmap, uv_movement).rgb;
+	
+	METALLIC = metallic;
+
+	ROUGHNESS = roughness;
 }

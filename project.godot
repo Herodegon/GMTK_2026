@@ -15,7 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="GMTK2026"
-run/main_scene="uid://bc12fhlv6oogj"
+run/main_scene="uid://cd3cfm70ia58u"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 

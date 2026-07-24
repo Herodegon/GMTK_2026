@@ -1,5 +1,7 @@
 extends Node3D
 
+@export var camera: Camera3D = null
+
 @onready var rod := $Rod
 
 var target_transform: Transform3D
@@ -12,9 +14,9 @@ func _physics_process(delta):
 	
 	if !camera_lock:
 		handle_camera()
-		$Camera.transform = lerp($Camera.transform, target_transform, 3.0 * delta)
+		camera.transform = lerp(camera.transform, target_transform, 3.0 * delta)
 	else:
-		$Camera.transform = lerp($Camera.transform, $Up.transform, 3.0 * delta)
+		camera.transform = lerp(camera.transform, $Up.transform, 3.0 * delta)
 
 func handle_camera():
 	if Input.is_action_just_pressed("up"):
