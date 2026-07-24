@@ -2,7 +2,9 @@ extends Node3D
 
 var freq: int = 0
 var num_frequencies: int = 3
-var tween: Tween
+
+var target_rotation: float = 0.0
+var target_position: float = -0.6
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -13,24 +15,23 @@ func prompt():
 	# outline, visual button prompt
 	pass
 
+func _physics_process(delta: float) -> void:
+	$knob.rotation.z = lerp_angle($knob.rotation.z, deg_to_rad(target_rotation), 10.0 * delta)
+	$needle.position.x = lerp($needle.position.x, target_position, 10.0 * delta)
+
 func change_freq():
 	freq += 1
 	
 	match freq % num_frequencies:
 		0:
 			print("radio: news")
+			target_rotation = 30.0
+			target_position = -.60
 		1:
 			print("radio: music")
+			target_rotation = 90.0
+			target_position = -.10
 		2:
 			print("radio: talkshow")
-
-	knob_lerp(30.0)
-func knob_lerp(degrees_rotating: float) -> void:
-	if tween and tween.is_running():
-		tween.kill()
-
-	var local_axis: Vector3 = Vector3.FORWARD
-	var target_basis: Basis = $knob.transform.basis.rotated(local_axis, deg_to_rad(degrees_rotating))
-	
-	tween = create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-	tween.tween_property($knob, "transform:basis", target_basis, 0.25)
+			target_rotation = 130.0
+			target_position = .38

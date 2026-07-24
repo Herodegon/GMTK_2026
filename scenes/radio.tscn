@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://7yxwr8hy125q" path="res://assets/models/Radio.fbx" id="1_y83x7"]
 [ext_resource type="Script" uid="uid://xfr2b45hub6s" path="res://scripts/radio.gd" id="2_ldjbc"]
 [ext_resource type="PackedScene" uid="uid://db0rlwb2nb0lf" path="res://assets/models/knob.fbx" id="3_7h80l"]
+[ext_resource type="PackedScene" uid="uid://dmqsd652abqvq" path="res://assets/models/needle.fbx" id="4_4b7o3"]
 
 [node name="radio" unique_id=221357753 instance=ExtResource("1_y83x7")]
 script = ExtResource("2_ldjbc")
@@ -11,4 +12,7 @@ script = ExtResource("2_ldjbc")
 visible = false
 
 [node name="knob" parent="." index="3" unique_id=335573315 instance=ExtResource("3_7h80l")]
-transform = Transform3D(0.35, 0, 0, 0, -1.5298985e-08, -0.35, 0, 0.35, -1.5298985e-08, 0.62939763, 0.8330077, 0.33428743)
+transform = Transform3D(0.35, 0, 0, 0, 0.35000002, 0, 0, 0, 0.35, 0.62939763, 0.8330077, 0.33428743)
+
+[node name="needle" parent="." index="4" unique_id=389213224 instance=ExtResource("4_4b7o3")]
+transform = Transform3D(0.15, 0, 0, 0, -6.5567085e-09, -0.15, 0, 0.15, -6.5567085e-09, -0.6, 0.837, 0.364)
