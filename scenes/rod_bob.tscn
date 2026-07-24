@@ -27,3 +27,4 @@ shape = SubResource("SphereShape3D_eqcmi")
 [node name="ShapeCast3D" type="ShapeCast3D" parent="." unique_id=388795374]
 shape = SubResource("SphereShape3D_bssgg")
 target_position = Vector3(0, 0, 0)
+collision_mask = 3
