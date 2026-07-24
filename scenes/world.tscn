@@ -56,33 +56,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="FishZone" type="Node" parent="." unique_id=505806900 node_paths=PackedStringArray("fish_parent")]
 script = ExtResource("2_71j4m")
-spawn_fish = false
 fish_scene = ExtResource("4_k0juu")
-fish_count = 999
 fish_parent = NodePath("FishTetherPoint")
 
 [node name="FishTetherPoint" type="Node3D" parent="FishZone" unique_id=1560212661]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, -15)
-
-[node name="Fish" parent="FishZone" unique_id=889686 node_paths=PackedStringArray("tether_point") instance=ExtResource("4_k0juu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, -16.111145)
-tether_point = NodePath("../FishTetherPoint")
-
-[node name="Fish2" parent="FishZone" unique_id=108076785 node_paths=PackedStringArray("tether_point") instance=ExtResource("4_k0juu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, -16.111145)
-tether_point = NodePath("../FishTetherPoint")
-
-[node name="Fish3" parent="FishZone" unique_id=1257811204 node_paths=PackedStringArray("tether_point") instance=ExtResource("4_k0juu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, -16.111145)
-tether_point = NodePath("../FishTetherPoint")
-
-[node name="Fish4" parent="FishZone" unique_id=1500314114 node_paths=PackedStringArray("tether_point") instance=ExtResource("4_k0juu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, -16.111145)
-tether_point = NodePath("../FishTetherPoint")
-
-[node name="Fish5" parent="FishZone" unique_id=2110074729 node_paths=PackedStringArray("tether_point") instance=ExtResource("4_k0juu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, -16.111145)
-tether_point = NodePath("../FishTetherPoint")
 
 [node name="Water" type="CSGMesh3D" parent="." unique_id=854924027]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, -15.5)

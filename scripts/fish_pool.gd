@@ -14,7 +14,7 @@ func _ready() -> void:
 	for i in range(fish_count):
 		var fish = fish_scene.instantiate()
 		fish.tether_point = fish_parent
-		fish.global_position = fish_parent.global_position
-		fish.global_rotation = fish_parent.global_rotation
 		fish_pool.append(fish)
 		add_child(fish)
+		fish.global_position = fish_parent.global_position
+		fish.global_rotation = fish_parent.global_rotation
