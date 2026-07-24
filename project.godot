@@ -19,6 +19,11 @@ run/main_scene="uid://bc12fhlv6oogj"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+EventBus="*uid://c4vrpy7dnf6y3"
+AudioManager="*uid://btphvpabldv80"
+
 [filesystem]
 
 import/blender/enabled=false

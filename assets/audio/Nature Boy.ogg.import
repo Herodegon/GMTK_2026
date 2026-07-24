@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dd6hi05pb7a0v"
+path="res://.godot/imported/Nature Boy.ogg-9dea6c3e2febe5005e59331c526d5959.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/Nature Boy.ogg"
+dest_files=["res://.godot/imported/Nature Boy.ogg-9dea6c3e2febe5005e59331c526d5959.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
