@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://ck5lenyq7mwgt" path="res://scenes/player.tscn" id="1_nnsk1"]
 [ext_resource type="Shader" uid="uid://dk3sqrori0yc6" path="res://assets/shaders/water_shader.gdshader" id="2_rwgxs"]
 [ext_resource type="Texture2D" uid="uid://tlcvb4dk52vw" path="res://assets/sprites/44_128x128.png" id="3_4wyf3"]
+[ext_resource type="PackedScene" uid="uid://s4qt08baqykk" path="res://scenes/radio.tscn" id="4_k0juu"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rwgxs"]
 
@@ -60,3 +61,6 @@ mesh = SubResource("BoxMesh_wnsco")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9878943, 1.0382786)
 mesh = SubResource("BoxMesh_4wyf3")
 material = SubResource("StandardMaterial3D_nnsk1")
+
+[node name="radio" parent="." unique_id=221357753 instance=ExtResource("4_k0juu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5130755, 0, -1.6876078)
