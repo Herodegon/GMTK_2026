@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://btphvpabldv80"]
+
+[ext_resource type="Script" uid="uid://sqlam6id7o4t" path="res://scripts/audio_manager.gd" id="1_8qd8g"]
+[ext_resource type="AudioStream" uid="uid://dd6hi05pb7a0v" path="res://assets/audio/Nature Boy.ogg" id="2_3asnw"]
+[ext_resource type="AudioStream" uid="uid://2t8n1hirlhq" path="res://assets/audio/SpongeBob SquarePants Production Music - South Pacific Island II.mp3" id="3_m6ggh"]
+
+[node name="AudioManager" type="Node" unique_id=1538918243]
+script = ExtResource("1_8qd8g")
+
+[node name="RadioPlayer" type="AudioStreamPlayer" parent="." unique_id=1854311369]
+
+[node name="AmbiencePlayers" type="Node" parent="." unique_id=1412998258]
+
+[node name="Ambience2" type="AudioStreamPlayer" parent="AmbiencePlayers" unique_id=1835082357]
+stream = ExtResource("3_m6ggh")
+
+[node name="Ambience1" type="AudioStreamPlayer" parent="AmbiencePlayers" unique_id=1154236081]
+stream = ExtResource("2_3asnw")
+
+[node name="AmbienceRain1" type="AudioStreamPlayer" parent="AmbiencePlayers" unique_id=175773719]
+
+[node name="AmbienceRain2" type="AudioStreamPlayer" parent="AmbiencePlayers" unique_id=460591704]
