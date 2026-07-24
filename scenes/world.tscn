@@ -4,6 +4,7 @@
 [ext_resource type="Shader" uid="uid://dk3sqrori0yc6" path="res://assets/shaders/water_shader.gdshader" id="2_rwgxs"]
 [ext_resource type="Texture2D" uid="uid://ektiiam2i606" path="res://assets/sprites/44_1024x1024.png" id="3_4wyf3"]
 [ext_resource type="PackedScene" uid="uid://cvmxuyikecdj0" path="res://assets/models/lake_dock.glb" id="4_k0juu"]
+[ext_resource type="Texture2D" uid="uid://cop2q3jl40x72" path="res://assets/sprites/tree.png" id="5_71j4m"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rwgxs"]
 
@@ -65,3 +66,7 @@ material = SubResource("StandardMaterial3D_nnsk1")
 
 [node name="lake_dock" parent="." unique_id=1396140080 instance=ExtResource("4_k0juu")]
 transform = Transform3D(-8.742278e-07, 0, 20, 0, 20, 0, -20, 0, -8.742278e-07, -0.3551669, -9.19143, -12.355739)
+
+[node name="Tree" type="Sprite3D" parent="." unique_id=1538844826]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 6.743025, -65.44882)
+texture = ExtResource("5_71j4m")
