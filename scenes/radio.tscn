@@ -8,7 +8,10 @@
 [node name="radio" unique_id=221357753 instance=ExtResource("1_y83x7")]
 script = ExtResource("2_ldjbc")
 
-[node name="Light" parent="." index="1" unique_id=1370361564]
+[node name="Camera" parent="." index="0" unique_id=348148464]
+visible = false
+
+[node name="Light" parent="." index="1" unique_id=1001186822]
 visible = false
 
 [node name="knob" parent="." index="3" unique_id=335573315 instance=ExtResource("3_7h80l")]

@@ -26,7 +26,7 @@ func _ready():
 var radio_stations = [
 	preload("res://assets/audio/Nature Boy.ogg"),
 	preload("res://assets/audio/sponge.mp3"),
-	preload("res://assets/audio/mario.mp3"),
+	preload("res://assets/audio/luigi.ogg"),
 ]
 
 func sync_radio():

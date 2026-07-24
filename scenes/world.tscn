@@ -2,11 +2,10 @@
 
 [ext_resource type="PackedScene" uid="uid://ck5lenyq7mwgt" path="res://scenes/player.tscn" id="1_nnsk1"]
 [ext_resource type="Shader" uid="uid://dk3sqrori0yc6" path="res://assets/shaders/water_shader.gdshader" id="2_rwgxs"]
-[ext_resource type="Texture2D" uid="uid://ektiiam2i606" path="res://assets/sprites/44_1024x1024.png" id="3_4wyf3"]
+[ext_resource type="Texture2D" uid="uid://tlcvb4dk52vw" path="res://assets/sprites/44_128x128.png" id="3_4wyf3"]
 [ext_resource type="PackedScene" uid="uid://cvmxuyikecdj0" path="res://assets/models/lake_dock.glb" id="4_k0juu"]
 [ext_resource type="Texture2D" uid="uid://cop2q3jl40x72" path="res://assets/sprites/tree.png" id="5_71j4m"]
-[ext_resource type="Texture2D" uid="uid://tlcvb4dk52vw" path="res://assets/sprites/44_128x128.png" id="3_4wyf3"]
-[ext_resource type="PackedScene" uid="uid://s4qt08baqykk" path="res://scenes/radio.tscn" id="4_k0juu"]
+[ext_resource type="PackedScene" uid="uid://s4qt08baqykk" path="res://scenes/radio.tscn" id="6_qfnet"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rwgxs"]
 
@@ -66,11 +65,12 @@ visible = false
 mesh = SubResource("BoxMesh_4wyf3")
 material = SubResource("StandardMaterial3D_nnsk1")
 
-[node name="lake_dock" parent="." unique_id=1396140080 instance=ExtResource("4_k0juu")]
-transform = Transform3D(-8.742278e-07, 0, 20, 0, 20, 0, -20, 0, -8.742278e-07, -0.3551669, -9.19143, -12.355739)
+[node name="lake_dock" parent="." unique_id=150056136 instance=ExtResource("4_k0juu")]
+transform = Transform3D(-8.742278e-07, 0, 20, 0, 20, 0, -20, 0, -8.742278e-07, 0, -10.533177, -14.7002)
 
 [node name="Tree" type="Sprite3D" parent="." unique_id=1538844826]
-transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 6.743025, -65.44882)
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 7.5327263, -0.29351044, -66.874466)
 texture = ExtResource("5_71j4m")
-[node name="radio" parent="." unique_id=221357753 instance=ExtResource("4_k0juu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5130755, 0, -1.6876078)
+
+[node name="radio" parent="." unique_id=221357753 instance=ExtResource("6_qfnet")]
+transform = Transform3D(0.67594, 0, 0.42790794, 0, 0.8, 0, -0.42790794, 0, 0.67594, -2.835584, -0.51936126, -1.7732098)
