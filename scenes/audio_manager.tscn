@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://sqlam6id7o4t" path="res://scripts/audio_manager.gd" id="1_8qd8g"]
 [ext_resource type="AudioStream" uid="uid://dd6hi05pb7a0v" path="res://assets/audio/Nature Boy.ogg" id="2_3asnw"]
-[ext_resource type="AudioStream" uid="uid://2t8n1hirlhq" path="res://assets/audio/SpongeBob SquarePants Production Music - South Pacific Island II.mp3" id="3_m6ggh"]
+[ext_resource type="AudioStream" uid="uid://2t8n1hirlhq" path="res://assets/audio/sponge.mp3" id="3_m6ggh"]
 
 [node name="AudioManager" type="Node" unique_id=1538918243]
 script = ExtResource("1_8qd8g")
