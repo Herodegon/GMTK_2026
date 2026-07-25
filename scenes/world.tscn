@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cvmxuyikecdj0" path="res://assets/models/lake_dock.glb" id="4_k0juu"]
 [ext_resource type="Texture2D" uid="uid://cop2q3jl40x72" path="res://assets/sprites/tree.png" id="5_71j4m"]
 [ext_resource type="PackedScene" uid="uid://s4qt08baqykk" path="res://scenes/radio.tscn" id="6_qfnet"]
+[ext_resource type="PackedScene" uid="uid://cx511b2r3d43t" path="res://scenes/beer.tscn" id="7_i7141"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rwgxs"]
 
@@ -50,7 +51,8 @@ albedo_color = Color(0.36078432, 0.70980394, 0.33333334, 1)
 environment = SubResource("Environment_wnsco")
 
 [node name="Sun" type="DirectionalLight3D" parent="." unique_id=1065809548]
-transform = Transform3D(-0.45209804, 0.86157525, -0.23085842, 1.8333646e-09, 0.2588191, 0.9659258, 0.89196813, 0.43669328, -0.11701165, 0, 0, 0)
+transform = Transform3D(0.73947954, -0.65024096, 0.17423151, -4.721209e-09, 0.2588191, 0.9659258, -0.67317903, -0.71428245, 0.19139144, 0, 0, 0)
+shadow_enabled = true
 
 [node name="Player" parent="." unique_id=390882609 instance=ExtResource("1_nnsk1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -73,4 +75,7 @@ transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 7.5327263, -0.29351044, -6
 texture = ExtResource("5_71j4m")
 
 [node name="radio" parent="." unique_id=221357753 instance=ExtResource("6_qfnet")]
-transform = Transform3D(0.67594, 0, 0.42790794, 0, 0.8, 0, -0.42790794, 0, 0.67594, -2.835584, -0.51936126, -1.7732098)
+transform = Transform3D(0.67594, 0, 0.42790794, 0, 0.8, 0, -0.42790794, 0, 0.67594, -2.835584, -0.569517, -1.7732098)
+
+[node name="Beer" parent="." unique_id=1067645362 instance=ExtResource("7_i7141")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.861028, -0.23782977, -2.0249205)

@@ -52,5 +52,6 @@ func interact():
 			EventBus.radio_interact.emit()
 		2:
 			print("beer")
+			EventBus.beer_interact.emit()
 		3:
 			print("bait")
