@@ -24,6 +24,8 @@ var reel_direction: RotationDirection = RotationDirection.CLOCKWISE
 func _ready() -> void:
 	rod_line.set_rope_length(rest_rope_length)
 	_bob_set_rest()
+	
+	EventBus.caught_fish.connect(reel)
 
 func _bob_set_rest() -> void:
 	bob.global_position = bob_start_position.global_position
@@ -34,8 +36,18 @@ func _spin_wheel(delta: float, direction: RotationDirection) -> void:
 	wheel_mesh.quaternion = wheel_mesh.quaternion * delta_q
 
 func cast_rod() -> void:
+	is_cast = true
 	if not bob.is_cast:
 		$Animator.play("Cast")
+
+func reel() -> void:
+	is_cast = false
+	bob.is_cast = false
+	$Animator.play_backwards("Reel")
+	#_bob_set_rest()
+
+func pull_back_bob():
+	pass#bob.
 
 func _animation_call_cast() -> void:
 	bob.apply_central_force(cast_direction.normalized() * cast_force)

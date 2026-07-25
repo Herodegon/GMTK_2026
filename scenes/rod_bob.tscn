@@ -11,10 +11,12 @@ rings = 4
 [sub_resource type="SphereShape3D" id="SphereShape3D_eqcmi"]
 radius = 0.05
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_bssgg"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_wnsco"]
 radius = 0.1
 
 [node name="RodBob" type="RigidBody3D" unique_id=402140256]
+collision_layer = 2
+collision_mask = 12
 mass = 0.1
 script = ExtResource("1_eqcmi")
 
@@ -24,8 +26,11 @@ mesh = SubResource("SphereMesh_nevuf")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2083414487]
 shape = SubResource("SphereShape3D_eqcmi")
 
-[node name="ShapeCast3D" type="ShapeCast3D" parent="." unique_id=388795374]
-shape = SubResource("SphereShape3D_bssgg")
-target_position = Vector3(0, 0, 0)
-collision_mask = 3
-collide_with_areas = true
+[node name="BobArea" type="Area3D" parent="." unique_id=941052932]
+collision_layer = 2
+collision_mask = 12
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BobArea" unique_id=251857434]
+shape = SubResource("SphereShape3D_wnsco")
+
+[connection signal="area_entered" from="BobArea" to="." method="_on_area_3d_area_entered"]

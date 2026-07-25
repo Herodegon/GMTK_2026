@@ -134,11 +134,12 @@ fish_scene = ExtResource("4_k0juu")
 fish_parent = NodePath("FishTetherPoint")
 
 [node name="FishTetherPoint" type="Node3D" parent="FishZone" unique_id=1560212661]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, -15)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.9339542, -15)
 
 [node name="BigRock" parent="." unique_id=1513042128 node_paths=PackedStringArray("target") instance=ExtResource("4_71j4m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 108.927155, 128, -256)
 target = NodePath("../FishZone/FishTetherPoint")
+minutes_to_reach_position = 10.0
 
 [node name="Water" type="MeshInstance3D" parent="." unique_id=1678096544]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, -4.9277363, -29.057419)
@@ -146,6 +147,8 @@ cast_shadow = 0
 mesh = SubResource("BoxMesh_bssgg")
 
 [node name="Area3D" type="Area3D" parent="Water" unique_id=1950476701]
+collision_layer = 8
+collision_mask = 6
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Water/Area3D" unique_id=943474553]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
