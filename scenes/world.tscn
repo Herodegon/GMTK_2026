@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://ck5lenyq7mwgt" path="res://scenes/player.tscn" id="1_nnsk1"]
 [ext_resource type="Script" uid="uid://b5map7mffi767" path="res://scripts/fish_pool.gd" id="2_71j4m"]
 [ext_resource type="Shader" uid="uid://dk3sqrori0yc6" path="res://assets/shaders/water_shader.gdshader" id="2_rwgxs"]
+[ext_resource type="PackedScene" uid="uid://6ky1hxxksaah" path="res://scenes/big_rock.tscn" id="4_71j4m"]
 [ext_resource type="PackedScene" uid="uid://bb1xamginjy27" path="res://scenes/fish.tscn" id="4_k0juu"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rwgxs"]
@@ -17,8 +18,17 @@ sky = SubResource("Sky_nnsk1")
 [sub_resource type="BoxMesh" id="BoxMesh_4wyf3"]
 size = Vector3(30, 0.1, 10)
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_gt2a8"]
+noise_type = 4
+frequency = 0.0306
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_llsrs"]
+height = 128
+noise = SubResource("FastNoiseLite_gt2a8")
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nnsk1"]
 albedo_color = Color(0.36078432, 0.70980394, 0.33333334, 1)
+albedo_texture = SubResource("NoiseTexture2D_llsrs")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_qfnet"]
 noise_type = 3
@@ -95,6 +105,11 @@ fish_parent = NodePath("FishTetherPoint")
 
 [node name="FishTetherPoint" type="Node3D" parent="FishZone" unique_id=1560212661]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, -15)
+
+[node name="BigRock" parent="." unique_id=1513042128 node_paths=PackedStringArray("target") instance=ExtResource("4_71j4m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 108.927155, 128, -256)
+target = NodePath("../FishZone/FishTetherPoint")
+minutes_to_reach_position = 0.1
 
 [node name="Ground" type="CSGMesh3D" parent="." unique_id=1403417302]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9878943, 1.0382786)

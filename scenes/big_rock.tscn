@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://6ky1hxxksaah"]
+
+[ext_resource type="Script" uid="uid://crsy6nc6ftcjf" path="res://scripts/big_rock.gd" id="1_m6bll"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q2ibp"]
+shading_mode = 2
+grow = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_bssgg"]
+material = SubResource("StandardMaterial3D_q2ibp")
+radius = 12.0
+height = 24.0
+radial_segments = 12
+rings = 8
+
+[node name="BigRock" type="Node3D" unique_id=1513042128]
+script = ExtResource("1_m6bll")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1337836010]
+mesh = SubResource("SphereMesh_bssgg")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1178933672]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+directional_shadow_mode = 1
+sky_mode = 1
