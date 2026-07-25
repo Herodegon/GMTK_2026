@@ -3,9 +3,6 @@
 [ext_resource type="Script" uid="uid://b8sjr4dp4a88o" path="res://scripts/main_menu.gd" id="1_l6cm7"]
 [ext_resource type="FontFile" uid="uid://bkse35n2orjqu" path="res://assets/fonts/Oswald-VariableFont_wght.ttf" id="2_ekxnf"]
 
-[sub_resource type="Theme" id="Theme_g4v7s"]
-default_font = ExtResource("2_ekxnf")
-
 [sub_resource type="Gradient" id="Gradient_ekxnf"]
 colors = PackedColorArray(0, 0, 0, 1, 0.04181391, 0, 0.639167, 1)
 
@@ -14,8 +11,17 @@ gradient = SubResource("Gradient_ekxnf")
 fill_from = Vector2(0.5217391, 0.78695655)
 fill_to = Vector2(0.5173913, 1)
 
+[sub_resource type="Theme" id="Theme_g4v7s"]
+default_font = ExtResource("2_ekxnf")
+
 [node name="main_menu" type="Node2D" unique_id=901798566]
 script = ExtResource("1_l6cm7")
+
+[node name="Gradient" type="TextureRect" parent="." unique_id=708815472]
+z_index = -1
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = SubResource("GradientTexture2D_g4v7s")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=394053688]
 offset_right = 1152.0
@@ -50,12 +56,6 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_font_sizes/font_size = 30
 text = "Quit"
-
-[node name="Gradient" type="TextureRect" parent="." unique_id=708815472]
-z_index = -1
-offset_right = 1152.0
-offset_bottom = 648.0
-texture = SubResource("GradientTexture2D_g4v7s")
 
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/VBoxContainer/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
