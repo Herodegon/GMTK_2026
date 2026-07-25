@@ -108,6 +108,8 @@ height = 512.0
 radial_segments = 32
 rings = 16
 
+[sub_resource type="BoxMesh" id="BoxMesh_g4v7s"]
+
 [node name="World" type="Node3D" unique_id=803202408]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1598877520]
@@ -131,7 +133,7 @@ fish_parent = NodePath("FishTetherPoint")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, -15)
 
 [node name="Water" type="MeshInstance3D" parent="." unique_id=1678096544]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, -4.9277363, -29.057419)
+transform = Transform3D(4.025, 0, 0, 0, 3, 0, 0, 0, 3, 0, -4.9277363, -29.057419)
 cast_shadow = 0
 mesh = SubResource("BoxMesh_bssgg")
 
@@ -158,3 +160,73 @@ target = NodePath("../AsteroidTarget")
 
 [node name="AsteroidTarget" type="Node3D" parent="." unique_id=46848897]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 159.13597, 164.25502, -321.9915)
+
+[node name="Distant Land" type="Node" parent="." unique_id=1043052647]
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Distant Land" unique_id=527756802]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 4.6109767, -137.90111)
+mesh = SubResource("BoxMesh_g4v7s")
+
+[node name="CSGMesh3D2" type="CSGMesh3D" parent="Distant Land" unique_id=1938341588]
+transform = Transform3D(17.515, 0, 0, 0, 17.515, 0, 0, 0, 17.515, -11.961876, 4.6109767, -152.15826)
+mesh = SubResource("BoxMesh_g4v7s")
+
+[node name="CSGMesh3D3" type="CSGMesh3D" parent="Distant Land" unique_id=1327158202]
+transform = Transform3D(17.515, 0, 0, 0, 17.515, 0, 0, 0, 17.515, 1.7346153, -4.0617604, -152.15826)
+mesh = SubResource("BoxMesh_g4v7s")
+
+[node name="CSGMesh3D4" type="CSGMesh3D" parent="Distant Land" unique_id=1654557825]
+transform = Transform3D(14.94, 0, 0, 0, 14.94, 0, 0, 0, 14.94, 11.211937, 4.373527, -152.15826)
+mesh = SubResource("BoxMesh_g4v7s")
+
+[node name="CSGMesh3D5" type="CSGMesh3D" parent="Distant Land" unique_id=1417247582]
+transform = Transform3D(78.00809, 0, -17.082668, 0, 20, 0, 128.12003, 0, 10.401079, -48.74427, -5.5946355, -231.5441)
+mesh = SubResource("BoxMesh_g4v7s")
+
+[node name="CSGMesh3D6" type="CSGMesh3D" parent="Distant Land" unique_id=308239478]
+transform = Transform3D(65.242805, 0, 9.657498, 0, 20.000002, 0, -35.976364, 0, 17.513788, 44.892776, -5.5946355, -183.95567)
+mesh = SubResource("BoxMesh_g4v7s")
+
+[node name="CSGMesh3D8" type="CSGMesh3D" parent="Distant Land" unique_id=346947698]
+transform = Transform3D(150, 0, 0, 0, 20, 0, 0, 0, 20, -393.40707, -5.5946355, -216.42073)
+mesh = SubResource("BoxMesh_g4v7s")
+
+[node name="CSGMesh3D9" type="CSGMesh3D" parent="Distant Land" unique_id=1470569442]
+transform = Transform3D(-58.976803, 0, 2.9100242, 0, 20, 0, -173.98743, 0, -0.9864156, -282.3349, -5.5946374, -118.41004)
+mesh = SubResource("BoxMesh_g4v7s")
+
+[node name="CSGMesh3D11" type="CSGMesh3D" parent="Distant Land" unique_id=1577003495]
+transform = Transform3D(145.95807, 0, 1.8659317, 0, 20, 0, -111.562225, 0, 2.44122, -317.84848, -5.5946374, 17.654404)
+mesh = SubResource("BoxMesh_g4v7s")
+
+[node name="CSGMesh3D12" type="CSGMesh3D" parent="Distant Land" unique_id=88668427]
+transform = Transform3D(154.20135, -10.622558, 3.4678993, -21.21848, 0.67068845, 29.78224, -97.57792, -16.932556, -0.9959129, -406.32712, -15.35132, -275.776)
+mesh = SubResource("BoxMesh_g4v7s")
+
+[node name="CSGMesh3D10" type="CSGMesh3D" parent="Distant Land" unique_id=1612428509]
+transform = Transform3D(39.84037, 0, 24.359829, 0, 20, 0, -95.00601, 0, 10.215193, 253.70474, -5.5946374, -23.77774)
+mesh = SubResource("BoxMesh_g4v7s")
+
+[node name="CSGMesh3D13" type="CSGMesh3D" parent="Distant Land" unique_id=323341481]
+transform = Transform3D(39.84037, 0, 24.359829, 0, 20, 0, -95.00601, 0, 10.215193, 311.57553, -5.5946374, -118.08843)
+mesh = SubResource("BoxMesh_g4v7s")
+
+[node name="CSGMesh3D14" type="CSGMesh3D" parent="Distant Land" unique_id=378192606]
+transform = Transform3D(-83.84476, 0, 15.348787, 0, 19.999998, 0, -59.861946, 0, -21.498049, 281.19632, -5.5946374, 42.343117)
+mesh = SubResource("BoxMesh_g4v7s")
+
+[node name="CSGMesh3D15" type="CSGMesh3D" parent="Distant Land" unique_id=1788548030]
+transform = Transform3D(-676.6107, 0, -62.125286, 0, 19.999998, 0, -483.07413, 0, 87.014854, 697.4584, -5.5946374, -741.69336)
+mesh = SubResource("BoxMesh_g4v7s")
+
+[node name="CSGMesh3D17" type="CSGMesh3D" parent="Distant Land" unique_id=91618849]
+transform = Transform3D(408.23163, 0, -93.13894, 0, 20, 0, -724.2304, 0, -52.500237, 1633.394, -5.5946374, 785.0149)
+mesh = SubResource("BoxMesh_g4v7s")
+
+[node name="CSGMesh3D16" type="CSGMesh3D" parent="Distant Land" unique_id=1723366467]
+transform = Transform3D(-692.3909, 0, 59.17985, 0, 20, 0, 460.17114, 0, 89.044266, -611.7605, -5.5946374, -793.80725)
+mesh = SubResource("BoxMesh_g4v7s")
+
+[node name="CSGMesh3D18" type="CSGMesh3D" parent="Distant Land" unique_id=950488440]
+transform = Transform3D(0.92440796, 0, 106.91643, 0, 20, 0, 831.36145, 0, -0.118873596, -1068.443, -19.95804, 496.14697)
+mesh = SubResource("BoxMesh_g4v7s")
