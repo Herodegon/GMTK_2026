@@ -33,6 +33,8 @@ func _physics_process(delta: float) -> void:
 			to_target.y = 0.0
 			move_and_collide(to_target.normalized() * velocity * delta)
 			velocity = lerp(velocity, 0.0, friction * delta)
+		SwimState.FIGHTING:
+			velocity = 0.0
 
 func _get_point_near_tether() -> Vector3:
 	var random_angle = randf_range(0.0, TAU)
@@ -44,3 +46,8 @@ func _look_at_target(target: Vector3, delta: float) -> void:
 	var target_angle = atan2(target_direction.x, target_direction.z)
 	var new_angle = lerp_angle(rotation.y, target_angle, delta * turn_speed * TAU)
 	rotation.y = new_angle
+
+func _on_area_3d_area_entered(area: Area3D) -> void:
+	if area.get_collision_layer_value(2): # is bob?
+		swim_state = SwimState.FIGHTING
+		call_deferred("reparent", area.get_parent())

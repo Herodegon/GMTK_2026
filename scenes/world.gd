@@ -8,4 +8,4 @@ func _ready() -> void:
 	big_rock.progress_to_target.connect(func(percentage: float): big_rock_progress = percentage)
 
 func _process(delta: float) -> void:
-	print("Big rock progress: ", big_rock_progress)
+	pass#print("Big rock progress: ", big_rock_progress)

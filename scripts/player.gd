@@ -11,6 +11,9 @@ var camera_lock: bool = false
 var interaction: int
 enum interactions {FISH, RADIO, BEER, BAIT}
 
+func _ready() -> void:
+	EventBus.caught_fish.connect(catch)
+
 func _physics_process(delta):
 	if !camera_lock:
 		camera.transform = lerp(camera.transform, target_transform, camera_speed * delta)
@@ -35,6 +38,9 @@ func _input(event):
 				target_transform = $Right.transform
 				interaction = interactions.BEER
 
+func catch():
+	camera_lock = true
+
 func interact():
 	# Node communication handled by EventBus.
 	# Define interaction signal in EventBus (EventBus.signal_name.emit(args))
@@ -43,7 +49,10 @@ func interact():
 	match interaction:
 		0:
 			print("fish")
-			rod.cast_rod()
+			if !rod.is_cast:
+				rod.cast_rod()
+			else:
+				rod.reel()
 		1:
 			print("radio")
 			EventBus.radio_interact.emit()
