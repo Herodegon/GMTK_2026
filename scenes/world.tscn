@@ -128,6 +128,9 @@ uv1_scale = Vector3(0.03, 0.03, 0.03)
 uv1_triplanar = true
 uv1_world_triplanar = true
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_w7kh3"]
+load_path = "res://.godot/imported/treebig.png-d5af677b1f1ff15f62ba229216020398.s3tc.ctex"
+
 [node name="World" type="Node3D" unique_id=803202408]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1598877520]
