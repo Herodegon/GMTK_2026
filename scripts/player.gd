@@ -1,6 +1,7 @@
 extends Node3D
 
-@onready var camera = %Camera
+@export var camera: Camera3D
+@onready var rod = $Rod
 
 @export var camera_speed: float = 3.0
 
@@ -46,7 +47,7 @@ func interact():
 	match interaction:
 		0:
 			print("fish")
-			$Rod/Animator.play("Cast")
+			rod.cast_rod()
 		1:
 			print("radio")
 			EventBus.radio_interact.emit()

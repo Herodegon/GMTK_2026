@@ -5,13 +5,17 @@
 [ext_resource type="Script" uid="uid://b5map7mffi767" path="res://scripts/fish_pool.gd" id="2_71j4m"]
 [ext_resource type="Shader" uid="uid://dk3sqrori0yc6" path="res://assets/shaders/water_shader.gdshader" id="2_rwgxs"]
 [ext_resource type="PackedScene" uid="uid://bb1xamginjy27" path="res://scenes/fish.tscn" id="4_k0juu"]
+[ext_resource type="PackedScene" uid="uid://cvmxuyikecdj0" path="res://assets/models/lake_dock.glb" id="5_71j4m"]
+[ext_resource type="PackedScene" uid="uid://s4qt08baqykk" path="res://scenes/radio.tscn" id="7_i7141"]
+[ext_resource type="PackedScene" uid="uid://cx511b2r3d43t" path="res://scenes/beer.tscn" id="8_4mrxx"]
+[ext_resource type="Script" uid="uid://46iaxlfy07o" path="res://scripts/asteroid.gd" id="9_7r4gi"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_31xl2"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_71j4m"]
 shader = ExtResource("1_4mrxx")
-shader_parameter/day_top_color = Color(0.911662, 0.59460527, 0.5901943, 1)
+shader_parameter/day_top_color = Color(0.1, 0.6, 1, 1)
 shader_parameter/day_bottom_color = Color(0.4, 0.8, 1, 1)
-shader_parameter/sunset_top_color = Color(0.9823807, 0.5861489, 0.4191698, 1)
-shader_parameter/sunset_bottom_color = Color(0.78760725, 0.17210707, 0.07210132, 1)
+shader_parameter/sunset_top_color = Color(0.7, 0.75, 1, 1)
+shader_parameter/sunset_bottom_color = Color(1, 0.5, 0.7, 1)
 shader_parameter/night_top_color = Color(0.02, 0, 0.04, 1)
 shader_parameter/night_bottom_color = Color(0.1, 0, 0.2, 1)
 shader_parameter/horizon_color = Color(0, 0.7, 0.8, 1)
@@ -38,39 +42,11 @@ shader_parameter/stars_speed = 1.0
 shader_parameter/overwritten_time = 0.0
 
 [sub_resource type="Sky" id="Sky_nnsk1"]
-sky_material = SubResource("ShaderMaterial_31xl2")
+sky_material = SubResource("ShaderMaterial_71j4m")
 
 [sub_resource type="Environment" id="Environment_wnsco"]
 background_mode = 2
 sky = SubResource("Sky_nnsk1")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_m2va7"]
-render_priority = 0
-shader = ExtResource("2_rwgxs")
-shader_parameter/albedo = Color(0.43968418, 0.8403236, 0.79322916, 1)
-shader_parameter/water_texture1 = ExtResource("3_4wyf3")
-shader_parameter/water_texture2 = ExtResource("3_4wyf3")
-shader_parameter/scroll_speed1 = Vector2(0.05, 0)
-shader_parameter/scroll_speed2 = Vector2(-0.03, 0)
-shader_parameter/blend_factor = 0.5
-shader_parameter/scale1 = Vector2(5, 5)
-shader_parameter/scale2 = Vector2(5, 5)
-shader_parameter/wave_strength = 0.25
-shader_parameter/wave_scale = 0.01
-shader_parameter/pixelation_level = 64
-shader_parameter/FoamSize = 0.5
-shader_parameter/WaterOpacity = 1.0
-shader_parameter/FoamGlowIntensity = 0.0
-
-[sub_resource type="BoxMesh" id="BoxMesh_wnsco"]
-material = SubResource("ShaderMaterial_m2va7")
-size = Vector3(30, 0.1, 30)
-
-[sub_resource type="BoxMesh" id="BoxMesh_4wyf3"]
-size = Vector3(30, 0.1, 10)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nnsk1"]
-albedo_color = Color(0.36078432, 0.70980394, 0.33333334, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_qfnet"]
 noise_type = 3
@@ -126,15 +102,19 @@ size = Vector3(32, 1, 32)
 [sub_resource type="BoxShape3D" id="BoxShape3D_bssgg"]
 size = Vector3(32, 0.1, 32)
 
+[sub_resource type="SphereMesh" id="SphereMesh_kac4t"]
+radius = 256.0
+height = 512.0
+radial_segments = 32
+rings = 16
+
 [node name="World" type="Node3D" unique_id=803202408]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1598877520]
 environment = SubResource("Environment_wnsco")
 
 [node name="Sun" type="DirectionalLight3D" parent="." unique_id=1065809548]
-transform = Transform3D(0.6629002, 0.096789956, 0.7424253, -0.6671599, 0.5263976, 0.52707064, -0.33979556, -0.8447114, 0.4135233, 0, 0, 0)
-light_energy = 0.5
-shadow_enabled = true
+transform = Transform3D(-0.45209804, 0.86157525, -0.23085842, 1.8333646e-09, 0.2588191, 0.9659258, 0.89196813, 0.43669328, -0.11701165, 0, 0, 0)
 
 [node name="Player" parent="." unique_id=390882609 node_paths=PackedStringArray("camera") instance=ExtResource("1_nnsk1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -150,14 +130,9 @@ fish_parent = NodePath("FishTetherPoint")
 [node name="FishTetherPoint" type="Node3D" parent="FishZone" unique_id=1560212661]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, -15)
 
-[node name="Ground" type="CSGMesh3D" parent="." unique_id=1403417302]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9878943, 1.0382786)
-visible = false
-mesh = SubResource("BoxMesh_4wyf3")
-material = SubResource("StandardMaterial3D_nnsk1")
-
 [node name="Water" type="MeshInstance3D" parent="." unique_id=1678096544]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, -14)
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, -4.9277363, -29.057419)
+cast_shadow = 0
 mesh = SubResource("BoxMesh_bssgg")
 
 [node name="Area3D" type="Area3D" parent="Water" unique_id=1950476701]
@@ -165,3 +140,21 @@ mesh = SubResource("BoxMesh_bssgg")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Water/Area3D" unique_id=943474553]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 shape = SubResource("BoxShape3D_bssgg")
+
+[node name="lake_dock" parent="." unique_id=1620997089 instance=ExtResource("5_71j4m")]
+transform = Transform3D(-8.742278e-07, 0, 20, 0, 20, 0, -20, 0, -8.742278e-07, 0, -10.061368, -14.746989)
+
+[node name="radio" parent="." unique_id=221357753 instance=ExtResource("7_i7141")]
+transform = Transform3D(0.43275934, 0, 0.41559517, 0, 0.6, 0, -0.41559517, 0, 0.43275934, -2.6756616, -0.0479742, -2.3074863)
+
+[node name="Beer" parent="." unique_id=1067645362 instance=ExtResource("8_4mrxx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8620312, 0.19864732, -1.6902468)
+
+[node name="Asteroid" type="CSGMesh3D" parent="." unique_id=1841053772 node_paths=PackedStringArray("target")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2574.5725, 2992.9666, -2719.9705)
+mesh = SubResource("SphereMesh_kac4t")
+script = ExtResource("9_7r4gi")
+target = NodePath("../AsteroidTarget")
+
+[node name="AsteroidTarget" type="Node3D" parent="." unique_id=46848897]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 159.13597, 164.25502, -321.9915)
