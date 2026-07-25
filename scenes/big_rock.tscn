@@ -22,10 +22,6 @@ script = ExtResource("1_m6bll")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1337836010]
 mesh = SubResource("SphereMesh_bssgg")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1178933672]
-directional_shadow_mode = 1
-sky_mode = 1
-
 [node name="CountdownLabel" type="Label3D" parent="." unique_id=566323884]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -15)
 pixel_size = 0.3
@@ -34,3 +30,4 @@ modulate = Color(0, 0, 0, 1)
 outline_modulate = Color(0.622253, 1.0107458e-06, 3.85046e-07, 1)
 text = "00:00"
 font = SubResource("SystemFont_q20xu")
+outline_size = 8
