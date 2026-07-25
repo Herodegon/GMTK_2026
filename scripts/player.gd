@@ -27,10 +27,6 @@ func _input(event):
 				target_transform = $Up.transform
 				interaction = interactions.FISH
 			
-			if event.is_pressed() and event.is_action_pressed("down"):
-				target_transform = $Down.transform
-				interaction = interactions.BAIT
-			
 			if Input.is_action_just_pressed("left"):
 				target_transform = $Left.transform
 				interaction = interactions.RADIO
@@ -54,5 +50,3 @@ func interact():
 		2:
 			print("beer")
 			EventBus.beer_interact.emit()
-		3:
-			print("bait")

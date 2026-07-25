@@ -1,9 +1,11 @@
 [gd_scene format=3 uid="uid://6ky1hxxksaah"]
 
 [ext_resource type="Script" uid="uid://crsy6nc6ftcjf" path="res://scripts/big_rock.gd" id="1_m6bll"]
+[ext_resource type="Texture2D" uid="uid://dxkih6axu6hua" path="res://assets/sprites/asteroid.png" id="2_wryjb"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q2ibp"]
 shading_mode = 2
+albedo_texture = ExtResource("2_wryjb")
 grow = true
 
 [sub_resource type="SphereMesh" id="SphereMesh_bssgg"]
@@ -28,6 +30,7 @@ sky_mode = 1
 
 [node name="CountdownLabel" type="Label3D" parent="." unique_id=566323884]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -15)
+visible = false
 pixel_size = 0.3
 billboard = 2
 modulate = Color(0, 0, 0, 1)
