@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://cx511b2r3d43t"]
+
+[ext_resource type="Script" uid="uid://bpjbulxv4sm46" path="res://scripts/beer.gd" id="1_31xl2"]
+[ext_resource type="PackedScene" uid="uid://ir7o3tb33h4h" path="res://assets/models/beer.fbx" id="2_he3c0"]
+
+[sub_resource type="Animation" id="Animation_he3c0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("beer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("beer:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_31xl2"]
+resource_name = "drink"
+length = 3.0000000000000004
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("beer:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 1.5, 2, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.5413608, 0.6175966, 0.08629234), Vector3(-0.56203973, 0.8741943, 0.07469684), Vector3(-0.5413608, 0.6175966, 0.08629234), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("beer:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 1.5, 2, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.7160944, -0.3896384, 0.122160055), Vector3(1.0586878, -0.30508375, 0.18871485), Vector3(0.7160944, -0.3896384, 0.122160055), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_he3c0"]
+_data = {
+&"RESET": SubResource("Animation_he3c0"),
+&"drink": SubResource("Animation_31xl2")
+}
+
+[node name="Beer" type="Node3D" unique_id=1067645362]
+script = ExtResource("1_31xl2")
+
+[node name="beer" parent="." unique_id=1338220165 instance=ExtResource("2_he3c0")]
+transform = Transform3D(0.6000001, 0, 0, 0, 0.6, 0, 0, 0, 0.59999996, 0, 0, 0)
+
+[node name="Animator" type="AnimationPlayer" parent="." unique_id=1039607564]
+libraries/ = SubResource("AnimationLibrary_he3c0")
+
+[connection signal="animation_finished" from="Animator" to="." method="_on_animator_animation_finished"]
