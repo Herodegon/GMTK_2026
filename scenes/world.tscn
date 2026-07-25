@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://s4qt08baqykk" path="res://scenes/radio.tscn" id="7_i7141"]
 [ext_resource type="PackedScene" uid="uid://cx511b2r3d43t" path="res://scenes/beer.tscn" id="8_4mrxx"]
 [ext_resource type="Script" uid="uid://46iaxlfy07o" path="res://scripts/asteroid.gd" id="9_7r4gi"]
+[ext_resource type="Texture2D" uid="uid://dhjeim7oki402" path="res://assets/sprites/treebig.png" id="10_w7kh3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_71j4m"]
 shader = ExtResource("1_4mrxx")
@@ -110,6 +111,9 @@ rings = 16
 
 [sub_resource type="BoxMesh" id="BoxMesh_g4v7s"]
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_w7kh3"]
+load_path = "res://.godot/imported/treebig.png-d5af677b1f1ff15f62ba229216020398.s3tc.ctex"
+
 [node name="World" type="Node3D" unique_id=803202408]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1598877520]
@@ -166,6 +170,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 159.13597, 164.25502, -321.99
 [node name="CSGMesh3D" type="CSGMesh3D" parent="Distant Land" unique_id=527756802]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 4.6109767, -137.90111)
 mesh = SubResource("BoxMesh_g4v7s")
+metadata/_edit_lock_ = true
 
 [node name="CSGMesh3D2" type="CSGMesh3D" parent="Distant Land" unique_id=1938341588]
 transform = Transform3D(17.515, 0, 0, 0, 17.515, 0, 0, 0, 17.515, -11.961876, 4.6109767, -152.15826)
@@ -230,3 +235,25 @@ mesh = SubResource("BoxMesh_g4v7s")
 [node name="CSGMesh3D18" type="CSGMesh3D" parent="Distant Land" unique_id=950488440]
 transform = Transform3D(0.92440796, 0, 106.91643, 0, 20, 0, 831.36145, 0, -0.118873596, -1068.443, -19.95804, 496.14697)
 mesh = SubResource("BoxMesh_g4v7s")
+
+[node name="Tree" type="Node" parent="." unique_id=1153588782]
+
+[node name="Sprite3D" type="Sprite3D" parent="Tree" unique_id=1967562518]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 17.1058, -139.59123)
+texture = ExtResource("10_w7kh3")
+
+[node name="Sprite3D2" type="Sprite3D" parent="Tree" unique_id=500834835]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2563257, 13.314955, -142.92952)
+texture = ExtResource("10_w7kh3")
+
+[node name="Sprite3D3" type="Sprite3D" parent="Tree" unique_id=1012252090]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45211983, 9.468412, -143.63463)
+texture = ExtResource("10_w7kh3")
+
+[node name="Sprite3D4" type="Sprite3D" parent="Tree" unique_id=502262278]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.349972, 21.915396, -146.60509)
+texture = ExtResource("10_w7kh3")
+
+[node name="Sprite3D5" type="Sprite3D" parent="Tree" unique_id=1536588926]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.1079493, 14.544444, -150.06438)
+texture = SubResource("CompressedTexture2D_w7kh3")
