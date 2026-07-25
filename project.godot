@@ -19,11 +19,6 @@ run/main_scene="uid://cd3cfm70ia58u"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
-[autoload]
-
-EventBus="*uid://c4vrpy7dnf6y3"
-AudioManager="*uid://btphvpabldv80"
-
 [filesystem]
 
 import/blender/enabled=false
@@ -62,6 +57,5 @@ common/physics_interpolation=true
 
 [rendering]
 
-textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
