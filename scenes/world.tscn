@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://bc12fhlv6oogj"]
 
+[ext_resource type="Shader" uid="uid://c8ef64s0815i5" path="res://assets/shaders/sky.gdshader" id="1_4mrxx"]
 [ext_resource type="PackedScene" uid="uid://ck5lenyq7mwgt" path="res://scenes/player.tscn" id="1_nnsk1"]
 [ext_resource type="Shader" uid="uid://dk3sqrori0yc6" path="res://assets/shaders/water_shader.gdshader" id="2_rwgxs"]
 [ext_resource type="Texture2D" uid="uid://tlcvb4dk52vw" path="res://assets/sprites/44_128x128.png" id="3_4wyf3"]
@@ -7,11 +8,41 @@
 [ext_resource type="Texture2D" uid="uid://cop2q3jl40x72" path="res://assets/sprites/tree.png" id="5_71j4m"]
 [ext_resource type="PackedScene" uid="uid://s4qt08baqykk" path="res://scenes/radio.tscn" id="6_qfnet"]
 [ext_resource type="PackedScene" uid="uid://cx511b2r3d43t" path="res://scenes/beer.tscn" id="7_i7141"]
+[ext_resource type="Script" uid="uid://46iaxlfy07o" path="res://scripts/asteroid.gd" id="9_7r4gi"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rwgxs"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_31xl2"]
+shader = ExtResource("1_4mrxx")
+shader_parameter/day_top_color = Color(0.911662, 0.59460527, 0.5901943, 1)
+shader_parameter/day_bottom_color = Color(0.4, 0.8, 1, 1)
+shader_parameter/sunset_top_color = Color(0.9823807, 0.5861489, 0.4191698, 1)
+shader_parameter/sunset_bottom_color = Color(0.78760725, 0.17210707, 0.07210132, 1)
+shader_parameter/night_top_color = Color(0.02, 0, 0.04, 1)
+shader_parameter/night_bottom_color = Color(0.1, 0, 0.2, 1)
+shader_parameter/horizon_color = Color(0, 0.7, 0.8, 1)
+shader_parameter/horizon_blur = 0.05
+shader_parameter/sun_color = Color(10, 8, 1, 1)
+shader_parameter/sun_sunset_color = Color(10, 0, 0, 1)
+shader_parameter/sun_size = 0.2
+shader_parameter/sun_blur = 10.0
+shader_parameter/moon_color = Color(1, 0.95, 0.7, 1)
+shader_parameter/moon_size = 0.06
+shader_parameter/moon_blur = 0.1
+shader_parameter/clouds_edge_color = Color(0.8, 0.8, 0.98, 1)
+shader_parameter/clouds_top_color = Color(1, 1, 1, 1)
+shader_parameter/clouds_middle_color = Color(0.92, 0.92, 0.98, 1)
+shader_parameter/clouds_bottom_color = Color(0.83, 0.83, 0.94, 1)
+shader_parameter/clouds_speed = 2.0
+shader_parameter/clouds_direction = 0.2
+shader_parameter/clouds_scale = 1.0
+shader_parameter/clouds_cutoff = 0.3
+shader_parameter/clouds_fuzziness = 0.5
+shader_parameter/clouds_weight = 0.0
+shader_parameter/clouds_blur = 0.25
+shader_parameter/stars_speed = 1.0
+shader_parameter/overwritten_time = 0.0
 
 [sub_resource type="Sky" id="Sky_nnsk1"]
-sky_material = SubResource("ProceduralSkyMaterial_rwgxs")
+sky_material = SubResource("ShaderMaterial_31xl2")
 
 [sub_resource type="Environment" id="Environment_wnsco"]
 background_mode = 2
@@ -45,13 +76,20 @@ size = Vector3(30, 0.1, 10)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nnsk1"]
 albedo_color = Color(0.36078432, 0.70980394, 0.33333334, 1)
 
+[sub_resource type="SphereMesh" id="SphereMesh_kac4t"]
+radius = 256.0
+height = 512.0
+radial_segments = 32
+rings = 16
+
 [node name="World" type="Node3D" unique_id=803202408]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1598877520]
 environment = SubResource("Environment_wnsco")
 
 [node name="Sun" type="DirectionalLight3D" parent="." unique_id=1065809548]
-transform = Transform3D(0.73947954, -0.65024096, 0.17423151, -4.721209e-09, 0.2588191, 0.9659258, -0.67317903, -0.71428245, 0.19139144, 0, 0, 0)
+transform = Transform3D(0.6629002, 0.096789956, 0.7424253, -0.6671599, 0.5263976, 0.52707064, -0.33979556, -0.8447114, 0.4135233, 0, 0, 0)
+light_energy = 0.5
 shadow_enabled = true
 
 [node name="Player" parent="." unique_id=390882609 instance=ExtResource("1_nnsk1")]
@@ -79,3 +117,12 @@ transform = Transform3D(0.67594, 0, 0.42790794, 0, 0.8, 0, -0.42790794, 0, 0.675
 
 [node name="Beer" parent="." unique_id=1067645362 instance=ExtResource("7_i7141")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.861028, -0.23782977, -2.0249205)
+
+[node name="Asteroid" type="CSGMesh3D" parent="." unique_id=1563115331 node_paths=PackedStringArray("target")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1916.84, 2295.8308, -1685.385)
+mesh = SubResource("SphereMesh_kac4t")
+script = ExtResource("9_7r4gi")
+target = NodePath("../AsteroidTarget")
+
+[node name="AsteroidTarget" type="Node3D" parent="." unique_id=880185536]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 89.08541, 26.138794, -330.89178)
