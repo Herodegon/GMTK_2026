@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://blgl3whxstr66"
+path="res://.godot/imported/Mlatw radio.mp3-23b2568becb0df0419b61cd261ae1aa2.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/Mlatw radio.mp3"
+dest_files=["res://.godot/imported/Mlatw radio.mp3-23b2568becb0df0419b61cd261ae1aa2.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
