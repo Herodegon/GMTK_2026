@@ -10,8 +10,8 @@ grow = true
 
 [sub_resource type="SphereMesh" id="SphereMesh_bssgg"]
 material = SubResource("StandardMaterial3D_q2ibp")
-radius = 12.0
-height = 24.0
+radius = 128.0
+height = 256.0
 radial_segments = 12
 rings = 8
 

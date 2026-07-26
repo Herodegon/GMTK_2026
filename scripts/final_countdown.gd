@@ -26,7 +26,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if final_countdown_timer > 0.0:
 		if not final_countdown_label.visible:
-			final_countdown_label.visible = true
+			#final_countdown_label.visible = true
 			# Grow from the label's center rather than its top-left corner.
 			final_countdown_label.pivot_offset = final_countdown_label.size / 2.0
 		final_countdown_label.text = final_countdown_timer_text

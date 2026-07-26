@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cd3cfm70ia58u"]
 
-[ext_resource type="PackedScene" uid="uid://bc12fhlv6oogj" path="res://scenes/world.tscn" id="1_uwrxv"]
+[ext_resource type="PackedScene" uid="uid://coee0hba2s08k" path="res://scenes/world_2.tscn" id="1_uwrxv"]
 
 [node name="Game" type="Node" unique_id=1547913741]
 
@@ -20,4 +20,4 @@ audio_listener_enable_3d = true
 size = Vector2i(384, 216)
 render_target_update_mode = 4
 
-[node name="World" parent="SubViewportContainer/SubViewport" unique_id=803202408 instance=ExtResource("1_uwrxv")]
+[node name="World2" parent="SubViewportContainer/SubViewport" unique_id=482332504 instance=ExtResource("1_uwrxv")]

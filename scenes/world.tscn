@@ -3,7 +3,6 @@
 [ext_resource type="Shader" uid="uid://c8ef64s0815i5" path="res://assets/shaders/sky.gdshader" id="1_4mrxx"]
 [ext_resource type="PackedScene" uid="uid://ck5lenyq7mwgt" path="res://scenes/player.tscn" id="1_nnsk1"]
 [ext_resource type="Script" uid="uid://b5map7mffi767" path="res://scripts/fish_pool.gd" id="2_71j4m"]
-[ext_resource type="Script" uid="uid://crc8xxm5huu8q" path="res://scripts/catch_event.gd" id="2_e3hyu"]
 [ext_resource type="Shader" uid="uid://dk3sqrori0yc6" path="res://assets/shaders/water_shader.gdshader" id="2_rwgxs"]
 [ext_resource type="PackedScene" uid="uid://6ky1hxxksaah" path="res://scenes/big_rock.tscn" id="4_71j4m"]
 [ext_resource type="PackedScene" uid="uid://bb1xamginjy27" path="res://scenes/fish.tscn" id="4_k0juu"]
@@ -123,9 +122,6 @@ environment = SubResource("Environment_wnsco")
 
 [node name="Sun" type="DirectionalLight3D" parent="." unique_id=1065809548]
 transform = Transform3D(-0.45209804, 0.86157525, -0.23085842, 1.8333646e-09, 0.2588191, 0.9659258, 0.89196813, 0.43669328, -0.11701165, 0, 0, 0)
-
-[node name="CatchEvent" type="Node" parent="Sun" unique_id=678340380]
-script = ExtResource("2_e3hyu")
 
 [node name="Player" parent="." unique_id=390882609 node_paths=PackedStringArray("camera") instance=ExtResource("1_nnsk1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

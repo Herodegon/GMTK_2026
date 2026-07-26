@@ -9,9 +9,9 @@ script = ExtResource("1_3vyb7")
 [node name="Up" type="Node3D" parent="." unique_id=1705405695]
 
 [node name="Left" type="Node3D" parent="." unique_id=951543623]
-transform = Transform3D(0.7071067, -0.18301268, 0.68301255, 0, 0.9659257, 0.25881898, -0.7071067, -0.18301268, 0.68301255, 0, 0, 0)
+transform = Transform3D(0.9659257, -0.0669873, 0.24999991, 0, 0.9659257, 0.25881898, -0.258819, -0.24999997, 0.9330124, -1.1386914, 0, -0.6910119)
 
 [node name="Right" type="Node3D" parent="." unique_id=1485090676]
-transform = Transform3D(0.7071067, 0.18301268, -0.68301255, 0, 0.9659257, 0.25881898, 0.7071067, -0.18301268, 0.68301255, 0, 0, 0)
+transform = Transform3D(0.7071067, 0.18301268, -0.68301255, 0, 0.9659257, 0.25881898, 0.7071067, -0.18301268, 0.68301255, 0.5843599, 0, -0.45709634)
 
 [node name="Rod" parent="." unique_id=1205497278 instance=ExtResource("2_g2els")]
