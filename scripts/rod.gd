@@ -13,6 +13,7 @@ enum RotationDirection {
 @onready var bob = $BobRestNode/RodBob as RigidBody3D
 
 @export var rest_rope_length: float = 1.0
+@export var reel_rope_length: float = 4.0
 @export var cast_rope_length: float = 16.0
 @export var spin_speed: float = 8.0
 @export var cast_direction: Vector3 = Vector3(0.0, 1.0, -2.0)
@@ -24,6 +25,8 @@ var is_reel_spinning: bool = false
 var is_catching: bool = false
 var reel_direction: RotationDirection = RotationDirection.CLOCKWISE
 var input_buffer_timer: float = 0.0
+
+var reel_tween: Tween = null
 
 func _ready() -> void:
 	rod_line.set_rope_length(rest_rope_length)
@@ -59,6 +62,8 @@ func _on_start_catch_event() -> void:
 
 func _on_end_catch_event() -> void:
 	_animation_reel_back()
+	if reel_tween: return
+	_animation_reel_back()
 	input_buffer_timer = input_buffer_time
 #
 #func _physics_process(delta):
@@ -67,9 +72,6 @@ func _on_end_catch_event() -> void:
 
 func _animation_reel_back() -> void:
 	$Animator.play_backwards("Reel")
-	bob.call_deferred("reparent", bob_start_position)
-	_bob_set_rest()
-	rod_line.set_rope_length(rest_rope_length)
 
 func _animation_call_cast() -> void:
 	bob.apply_central_force(cast_direction.normalized() * cast_force)
@@ -81,6 +83,23 @@ func _animation_call_cast() -> void:
 	reel_direction = RotationDirection.CLOCKWISE
 	is_reel_spinning = true
 
+func animation_reel_big_fish(fish: Node3D) -> void:
+	rod_line.set_rope_length(reel_rope_length)
+	reel_tween = create_tween()
+	reel_tween.tween_property(fish, "global_position", bob_start_position.global_position, 1.0)
+	# Detach the bob before scaling the fish to avoid inherited basis scaling
+	reel_tween.tween_callback(func() -> void:
+		rod_line.set_rope_length(rest_rope_length)
+		bob.reparent(bob_start_position)
+		_bob_set_rest()
+	)
+	reel_tween.tween_property(fish, "scale", Vector3(1.1, 1.1, 1.1), 0.2).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	reel_tween.tween_property(fish, "scale", Vector3(0.01, 0.01, 0.01), 0.7).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	reel_tween.finished.connect(func() -> void:
+		if is_instance_valid(fish):
+			fish.queue_free()
+		reel_tween = null
+	)
 
 func _on_animator_animation_finished(anim_name):
 	if anim_name == "Reel":

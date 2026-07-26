@@ -48,9 +48,10 @@ func _on_start_catch_event() -> void:
 func _on_end_catch_event() -> void:
 	camera_lock = false
 
-func _on_win_catch_event() -> void:
+func _on_win_catch_event(fish: Node3D) -> void:
 	total_caught_fish += 1
 	EventBus.update_fish_count.emit(total_caught_fish)
+	rod.animation_reel_big_fish(fish)
 
 func interact():
 	# Node communication handled by EventBus.
