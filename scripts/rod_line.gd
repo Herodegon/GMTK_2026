@@ -45,15 +45,6 @@ func set_rope_length(length: float) -> void:
 	_target_length = length
 	_segment_length = _current_length / float(max(position_list.size() - 1, 1))
 
-# Pay the line out (or reel it in) smoothly toward a length over time.
-func extend_rope_to(length: float) -> void:
-	# Allocate enough segments for the final length now so we never reallocate
-	# mid-flight, but keep the current effective length so it grows gradually.
-	var keep_length := _current_length
-	_build_rope(length)
-	_target_length = length
-	_current_length = keep_length
-
 func _advance_payout(delta: float) -> void:
 	_current_length = move_toward(_current_length, _target_length, payout_speed * delta)
 	_segment_length = _current_length / float(max(position_list.size() - 1, 1))

@@ -22,6 +22,10 @@ gravity_scale = 0.0
 script = ExtResource("1_n6yr6")
 tether_radius = 10.0
 combat_target_point = NodePath("FightTarget")
+impulse_strength = null
+combat_impulse_strength = null
+combat_offset_variance = null
+turn_speed = null
 friction = 0.2
 max_swim_cooldown = 4.0
 

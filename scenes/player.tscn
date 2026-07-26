@@ -8,13 +8,10 @@ script = ExtResource("1_3vyb7")
 
 [node name="Up" type="Node3D" parent="." unique_id=1705405695]
 
-[node name="Down" type="Node3D" parent="." unique_id=567510098]
-transform = Transform3D(0.9999999, 0, 0, 0, 0.70710677, 0.7071067, 0, -0.7071067, 0.70710665, 0, 0, 0)
-
 [node name="Left" type="Node3D" parent="." unique_id=951543623]
-transform = Transform3D(0.4999999, -0.43301266, 0.7499999, 0, 0.86602527, 0.4999999, -0.8660253, -0.24999996, 0.43301257, 0, 0, 0)
+transform = Transform3D(0.7071067, -0.18301268, 0.68301255, 0, 0.9659257, 0.25881898, -0.7071067, -0.18301268, 0.68301255, 0, 0, 0)
 
 [node name="Right" type="Node3D" parent="." unique_id=1485090676]
-transform = Transform3D(0.4999999, 0.43301266, -0.7499999, 0, 0.86602527, 0.4999999, 0.8660253, -0.24999996, 0.43301257, 0, 0, 0)
+transform = Transform3D(0.7071067, 0.18301268, -0.68301255, 0, 0.9659257, 0.25881898, 0.7071067, -0.18301268, 0.68301255, 0, 0, 0)
 
 [node name="Rod" parent="." unique_id=1205497278 instance=ExtResource("2_g2els")]

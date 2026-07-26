@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://6ky1hxxksaah"]
+
+[ext_resource type="Script" uid="uid://crsy6nc6ftcjf" path="res://scripts/big_rock.gd" id="1_m6bll"]
+[ext_resource type="Texture2D" uid="uid://dxkih6axu6hua" path="res://assets/sprites/asteroid.png" id="2_wryjb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q2ibp"]
+shading_mode = 2
+albedo_texture = ExtResource("2_wryjb")
+grow = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_bssgg"]
+material = SubResource("StandardMaterial3D_q2ibp")
+radius = 12.0
+height = 24.0
+radial_segments = 12
+rings = 8
+
+[sub_resource type="SystemFont" id="SystemFont_q20xu"]
+subpixel_positioning = 0
+
+[node name="BigRock" type="Node3D" unique_id=1513042128]
+script = ExtResource("1_m6bll")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1337836010]
+mesh = SubResource("SphereMesh_bssgg")
+
+[node name="CountdownLabel" type="Label3D" parent="." unique_id=566323884]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -15)
+visible = false
+pixel_size = 0.3
+billboard = 2
+modulate = Color(0, 0, 0, 1)
+outline_modulate = Color(0.622253, 1.0107458e-06, 3.85046e-07, 1)
+text = "00:00"
+font = SubResource("SystemFont_q20xu")
+outline_size = 8
