@@ -6,10 +6,23 @@ var num_frequencies: int = 3
 var target_rotation: float = 0.0
 var target_position: float = -0.6
 
-# Called when the node enters the scene tree for the first time.
+var time: float = 0.0
+
+var radio_stations = [
+	preload("res://assets/audio/sponge.mp3"),
+	preload("res://assets/audio/Nature Boy.ogg"),
+	preload("res://assets/audio/luigi.ogg"),
+]
+
 func _ready() -> void:
-	EventBus.radio_prompt.connect(prompt)
+	#EventBus.radio_prompt.connect(prompt)
 	EventBus.radio_interact.connect(change_freq)
+	
+	time = 0.0
+	
+	$Audio.set_bus("Radio")
+	$Audio.stream = radio_stations[0]
+	$Audio.play()
 
 func prompt():
 	# outline, visual button prompt
@@ -21,6 +34,8 @@ func _physics_process(delta: float) -> void:
 
 func change_freq():
 	freq += 1
+	
+	sync_radio()
 	
 	match freq % num_frequencies:
 		0:
@@ -35,3 +50,14 @@ func change_freq():
 			print("radio: talkshow")
 			target_rotation = 130.0
 			target_position = .38
+
+func sync_radio():
+	var pos = $Audio.get_playback_position()
+	var new_pos = time + $Audio.get_playback_position()
+	
+	### Test radio_player.seek(new_pos) if there are problems
+	### .seek() moves the cursor w/out resuming/playing
+	
+	$Audio.stop()
+	$Audio.stream = radio_stations[freq % num_frequencies]
+	$Audio.play(new_pos)

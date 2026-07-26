@@ -22,7 +22,6 @@ config/icon="res://icon.svg"
 [autoload]
 
 EventBus="*uid://c4vrpy7dnf6y3"
-AudioManager="*uid://btphvpabldv80"
 
 [filesystem]
 
