@@ -31,8 +31,7 @@ func prompt():
 func _physics_process(delta: float) -> void:
 	
 	var minutes: int = floori($Timer.time_left / 60.0)
-	var seconds: int = int($Timer.time_left) % 60
-	$MeshInstance3D/Time.text = "%02d:%02d" % [minutes, seconds]
+	$MeshInstance3D/Time.text = "06:%02d" % [43-minutes]
 	
 	$knob.rotation.z = lerp_angle($knob.rotation.z, deg_to_rad(target_rotation), 10.0 * delta)
 	$needle.position.x = lerp($needle.position.x, target_position, 10.0 * delta)
