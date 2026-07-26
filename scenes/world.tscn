@@ -5,10 +5,12 @@
 [ext_resource type="Script" uid="uid://b5map7mffi767" path="res://scripts/fish_pool.gd" id="2_71j4m"]
 [ext_resource type="Shader" uid="uid://dk3sqrori0yc6" path="res://assets/shaders/water_shader.gdshader" id="2_rwgxs"]
 [ext_resource type="PackedScene" uid="uid://bb1xamginjy27" path="res://scenes/fish.tscn" id="4_k0juu"]
-[ext_resource type="PackedScene" uid="uid://cvmxuyikecdj0" path="res://assets/models/lake_dock.glb" id="5_71j4m"]
+[ext_resource type="PackedScene" uid="uid://bq4nx2bnqs46u" path="res://assets/models/dock.fbx" id="6_e3hyu"]
 [ext_resource type="PackedScene" uid="uid://s4qt08baqykk" path="res://scenes/radio.tscn" id="7_i7141"]
 [ext_resource type="PackedScene" uid="uid://cx511b2r3d43t" path="res://scenes/beer.tscn" id="8_4mrxx"]
 [ext_resource type="Script" uid="uid://46iaxlfy07o" path="res://scripts/asteroid.gd" id="9_7r4gi"]
+[ext_resource type="PackedScene" uid="uid://es7cwyij1w4d" path="res://assets/models/land2.fbx" id="10_w7kh3"]
+[ext_resource type="Texture2D" uid="uid://dtgyv1gbds0c5" path="res://assets/sprites/grass_texture.png" id="11_e3hyu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_71j4m"]
 shader = ExtResource("1_4mrxx")
@@ -97,7 +99,7 @@ shader_parameter/normalmap = SubResource("NoiseTexture2D_qfnet")
 
 [sub_resource type="BoxMesh" id="BoxMesh_bssgg"]
 material = SubResource("ShaderMaterial_m2va7")
-size = Vector3(32, 1, 32)
+size = Vector3(64, 1, 64)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bssgg"]
 size = Vector3(32, 0.1, 32)
@@ -107,6 +109,27 @@ radius = 256.0
 height = 512.0
 radial_segments = 32
 rings = 16
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q5onr"]
+albedo_texture = ExtResource("11_e3hyu")
+uv1_scale = Vector3(0.03, 0.03, 0.03)
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e3hyu"]
+albedo_texture = ExtResource("11_e3hyu")
+uv1_scale = Vector3(0.03, 0.03, 0.03)
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jhx03"]
+albedo_texture = ExtResource("11_e3hyu")
+uv1_scale = Vector3(0.03, 0.03, 0.03)
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_w7kh3"]
+load_path = "res://.godot/imported/treebig.png-d5af677b1f1ff15f62ba229216020398.s3tc.ctex"
 
 [node name="World" type="Node3D" unique_id=803202408]
 
@@ -131,7 +154,7 @@ fish_parent = NodePath("FishTetherPoint")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, -15)
 
 [node name="Water" type="MeshInstance3D" parent="." unique_id=1678096544]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, -4.9277363, -29.057419)
+transform = Transform3D(4.025, 0, 0, 0, 3, 0, 0, 0, 3, 0, -4.9277363, -29.057419)
 cast_shadow = 0
 mesh = SubResource("BoxMesh_bssgg")
 
@@ -141,14 +164,14 @@ mesh = SubResource("BoxMesh_bssgg")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 shape = SubResource("BoxShape3D_bssgg")
 
-[node name="lake_dock" parent="." unique_id=1620997089 instance=ExtResource("5_71j4m")]
-transform = Transform3D(-8.742278e-07, 0, 20, 0, 20, 0, -20, 0, -8.742278e-07, 0, -10.061368, -14.746989)
+[node name="dock" parent="." unique_id=1269717986 instance=ExtResource("6_e3hyu")]
+transform = Transform3D(2, 0, 1.1368684e-14, 0, 2, 0, -1.1368684e-14, 0, 2, 0.32866538, -1.3545494, -0.31669283)
 
 [node name="radio" parent="." unique_id=221357753 instance=ExtResource("7_i7141")]
-transform = Transform3D(0.43275934, 0, 0.41559517, 0, 0.6, 0, -0.41559517, 0, 0.43275934, -2.6756616, -0.0479742, -2.3074863)
+transform = Transform3D(0.43275934, 0, 0.41559517, 0, 0.6, 0, -0.41559517, 0, 0.43275934, -2.1050892, -0.0479742, -2.077876)
 
 [node name="Beer" parent="." unique_id=1067645362 instance=ExtResource("8_4mrxx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8620312, 0.19864732, -1.6902468)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.709683, 0.19864732, -2.065796)
 
 [node name="Asteroid" type="CSGMesh3D" parent="." unique_id=1841053772 node_paths=PackedStringArray("target")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2574.5725, 2992.9666, -2719.9705)
@@ -158,3 +181,25 @@ target = NodePath("../AsteroidTarget")
 
 [node name="AsteroidTarget" type="Node3D" parent="." unique_id=46848897]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 159.13597, 164.25502, -321.9915)
+
+[node name="land5" parent="." unique_id=872582906 instance=ExtResource("10_w7kh3")]
+transform = Transform3D(14.142135, 0, -14.142137, 0, 20, 0, 14.142137, 0, 14.142135, 0, -39.401764, -562.7138)
+
+[node name="Plane" parent="land5" index="0" unique_id=1681245266]
+surface_material_override/0 = SubResource("StandardMaterial3D_q5onr")
+
+[node name="land3" parent="." unique_id=1420667875 instance=ExtResource("10_w7kh3")]
+transform = Transform3D(-8.565192, 0, -18.073116, 0, 20, 0, 18.073116, 0, -8.565192, 638.5411, -39.401764, -58.56134)
+
+[node name="Plane" parent="land3" index="0" unique_id=1681245266]
+surface_material_override/0 = SubResource("StandardMaterial3D_e3hyu")
+
+[node name="land4" parent="." unique_id=68054134 instance=ExtResource("10_w7kh3")]
+transform = Transform3D(14.615326, 0, 13.652554, 0, 19.999996, 0, -13.652554, 0, 14.615326, -671.34265, -39.401764, -293.12894)
+
+[node name="Plane" parent="land4" index="0" unique_id=1681245266]
+surface_material_override/0 = SubResource("StandardMaterial3D_jhx03")
+
+[editable path="land5"]
+[editable path="land3"]
+[editable path="land4"]

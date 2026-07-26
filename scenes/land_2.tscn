@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://b01gcnmluo4j2"]
+
+[ext_resource type="PackedScene" uid="uid://es7cwyij1w4d" path="res://assets/models/land2.fbx" id="1_em84m"]
+[ext_resource type="Texture2D" uid="uid://dtgyv1gbds0c5" path="res://assets/sprites/grass_texture.png" id="2_xmivv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ie26a"]
+albedo_texture = ExtResource("2_xmivv")
+uv1_scale = Vector3(0.2, 0.2, 0.2)
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[node name="land2" unique_id=872582906 instance=ExtResource("1_em84m")]
+
+[node name="Plane" parent="." index="0" unique_id=133234491]
+material_override = SubResource("StandardMaterial3D_ie26a")
