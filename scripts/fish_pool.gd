@@ -16,5 +16,6 @@ func _ready() -> void:
 		fish.tether_point = fish_parent
 		fish_pool.append(fish)
 		add_child(fish)
-		fish.global_position = fish_parent.global_position
+		var variance = Vector3(randf_range(-3.0, 3.0), 0.0, randf_range(-3.0, 3.0))
+		fish.global_position = fish_parent.global_position + variance
 		fish.global_rotation = fish_parent.global_rotation
