@@ -18,42 +18,60 @@ enum RotationDirection {
 @export var cast_direction: Vector3 = Vector3(0.0, 1.0, -2.0)
 @export var cast_force: float = 100.0
 
-var is_cast: bool = false
+@export var input_buffer_time: float = 0.5
+
+var is_reel_spinning: bool = false
+var is_catching: bool = false
 var reel_direction: RotationDirection = RotationDirection.CLOCKWISE
+var input_buffer_timer: float = 0.0
 
 func _ready() -> void:
 	rod_line.set_rope_length(rest_rope_length)
 	_bob_set_rest()
+	bob.is_reel_spinning_changed.connect(func(is_spinning: bool) -> void:
+		is_reel_spinning = is_spinning
+	)
 	
-	EventBus.caught_fish.connect(reel)
+	EventBus.start_catch_event.connect(_on_start_catch_event)
+	EventBus.end_catch_event.connect(_on_end_catch_event)
+
+func _process(delta: float) -> void:
+	if is_reel_spinning:
+		_spin_wheel(delta, reel_direction)
 
 func _bob_set_rest() -> void:
 	bob.global_position = bob_start_position.global_position
 	bob.freeze = true
+	bob.is_cast = false
 
 func _spin_wheel(delta: float, direction: RotationDirection) -> void:
 	var delta_q = Quaternion(Vector3.UP, spin_speed * delta * float(direction))
 	wheel_mesh.quaternion = wheel_mesh.quaternion * delta_q
 
 func cast_rod() -> void:
-	is_cast = true
-	if not bob.is_cast:
+	if not bob.is_cast and input_buffer_timer <= 0.0:
 		$Animator.play("Cast")
 
-func reel() -> void:
-	is_cast = false
-	bob.is_cast = false
+func _on_start_catch_event() -> void:
+	reel_direction = RotationDirection.COUNTER_CLOCKWISE
+	is_reel_spinning = true
 	$Animator.play_backwards("Reel")
-	#_bob_set_rest()
 
-func pull_back_bob():
-	pass#bob.
+func _on_end_catch_event() -> void:
+	_animation_reel_back()
+	input_buffer_timer = input_buffer_time
+
+func _animation_reel_back() -> void:
+	bob.call_deferred("reparent", bob_start_position)
+	_bob_set_rest()
+	rod_line.set_rope_length(rest_rope_length)
 
 func _animation_call_cast() -> void:
 	bob.apply_central_force(cast_direction.normalized() * cast_force)
 	bob.freeze = false
 	bob.is_cast = true
+	bob.occupied = false
 
 	rod_line.set_rope_length(cast_rope_length)
 	reel_direction = RotationDirection.CLOCKWISE
-	_spin_wheel(spin_speed, reel_direction)
+	is_reel_spinning = true

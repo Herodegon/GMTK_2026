@@ -39,12 +39,68 @@ tracks/2/path = NodePath(".")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(1),
+"times": PackedFloat32Array(1.1),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
 "method": &"_animation_call_cast"
 }]
+}
+
+[sub_resource type="Animation" id="Animation_erixr"]
+resource_name = "Pull_Left"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mesh:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.6071543, -0.5783014, -0.5725271), Vector3(0.486, -0.578, -0.058)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Mesh:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.5235988, 0, 0), Vector3(0.5235988, 0, 0.34906584)]
+}
+
+[sub_resource type="Animation" id="Animation_1ykso"]
+resource_name = "Pull_right"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mesh:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.6071543, -0.5783014, -0.5725271), Vector3(0.728, -0.578, -0.058)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Mesh:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.5235988, 0, 0), Vector3(0.5235988, 0, -0.34906584)]
 }
 
 [sub_resource type="Animation" id="Animation_g2els"]
@@ -114,24 +170,12 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector3(-0.5235988, 0, 0), Vector3(0.5235988, 0, 0), Vector3(0.5235988, 0, 0), Vector3(-0.9987162, 0, 0), Vector3(-1.0471976, 0, 0)]
 }
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(1.1),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"pull_back_bob"
-}]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2kija"]
 _data = {
 &"Cast": SubResource("Animation_3vyb7"),
+&"Pull_Left": SubResource("Animation_erixr"),
+&"Pull_right": SubResource("Animation_1ykso"),
 &"RESET": SubResource("Animation_g2els"),
 &"Reel": SubResource("Animation_ch35b")
 }
@@ -178,3 +222,5 @@ mesh = SubResource("CylinderMesh_bssgg")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.607, -0.555, -1.098)
 
 [node name="RodBob" parent="BobRestNode" unique_id=402140256 instance=ExtResource("2_ch35b")]
+collision_layer = 1
+collision_mask = 1

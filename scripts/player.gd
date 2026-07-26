@@ -8,11 +8,15 @@ extends Node3D
 var target_transform: Transform3D
 var camera_lock: bool = false
 
+var total_caught_fish: int = 0
+
 var interaction: int
 enum interactions {FISH, RADIO, BEER, BAIT}
 
 func _ready() -> void:
-	EventBus.caught_fish.connect(catch)
+	EventBus.start_catch_event.connect(_on_start_catch_event)
+	EventBus.end_catch_event.connect(_on_end_catch_event)
+	EventBus.win_catch_event.connect(_on_win_catch_event)
 
 func _physics_process(delta):
 	if !camera_lock:
@@ -38,24 +42,29 @@ func _input(event):
 				target_transform = $Right.transform
 				interaction = interactions.BEER
 
-func catch():
+func _on_start_catch_event() -> void:
 	camera_lock = true
+
+func _on_end_catch_event() -> void:
+	camera_lock = false
+
+func _on_win_catch_event() -> void:
+	total_caught_fish += 1
+	EventBus.update_fish_count.emit(total_caught_fish)
 
 func interact():
 	# Node communication handled by EventBus.
 	# Define interaction signal in EventBus (EventBus.signal_name.emit(args))
 	# Connect interaction signal in interacted object (EventBus.signal_name.connect(method_name))
 	
-	match interaction:
-		0:
-			print("fish")
-			if !rod.is_cast:
+	if !camera_lock:
+		match interaction:
+			0:
+				print("fish")
 				rod.cast_rod()
-			else:
-				rod.reel()
-		1:
-			print("radio")
-			EventBus.radio_interact.emit()
-		2:
-			print("beer")
-			EventBus.beer_interact.emit()
+			1:
+				print("radio")
+				EventBus.radio_interact.emit()
+			2:
+				print("beer")
+				EventBus.beer_interact.emit()

@@ -1,9 +1,5 @@
 extends Node3D
 
-signal progress_to_target(percentage: float)
-signal to_final_countdown_timer(float: float)
-signal to_final_countdown_timer_text(text: String)
-
 @export var target: Node3D
 @export var minutes_to_reach_position: float = 15.0 # in minutes
 
@@ -38,14 +34,14 @@ func move_towards_target(delta: float) -> void:
 	else:
 		var percentage_of_time_elapsed = 1.0 - (time_until_target_position / minutes_to_reach_position)
 		transform.origin = start_position.lerp(target_position, percentage_of_time_elapsed)
-		progress_to_target.emit(percentage_of_time_elapsed)
+		EventBus.progress_to_target.emit(percentage_of_time_elapsed)
 
 func update_timer_label() -> void:
 	var countdown_text: String = "%02d:%02d:%02d" % [int(time_until_target_position)/60.0, int(time_until_target_position)%60, int(time_until_target_position*100)%100]
 	if time_until_target_position <= 60.0:
 		if countdown_label.visible:
 			countdown_label.visible = false
-		to_final_countdown_timer.emit(time_until_target_position)
-		to_final_countdown_timer_text.emit(countdown_text)
+		EventBus.to_final_countdown_timer.emit(time_until_target_position)
+		EventBus.to_final_countdown_timer_text.emit(countdown_text)
 		return
 	countdown_label.text = countdown_text

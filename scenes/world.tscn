@@ -2,14 +2,15 @@
 
 [ext_resource type="Shader" uid="uid://c8ef64s0815i5" path="res://assets/shaders/sky.gdshader" id="1_4mrxx"]
 [ext_resource type="PackedScene" uid="uid://ck5lenyq7mwgt" path="res://scenes/player.tscn" id="1_nnsk1"]
-[ext_resource type="Script" uid="uid://le1t2v5mx6ug" path="res://scenes/world.gd" id="1_w7kh3"]
 [ext_resource type="Script" uid="uid://b5map7mffi767" path="res://scripts/fish_pool.gd" id="2_71j4m"]
+[ext_resource type="Script" uid="uid://crc8xxm5huu8q" path="res://scripts/catch_event.gd" id="2_e3hyu"]
 [ext_resource type="Shader" uid="uid://dk3sqrori0yc6" path="res://assets/shaders/water_shader.gdshader" id="2_rwgxs"]
 [ext_resource type="PackedScene" uid="uid://6ky1hxxksaah" path="res://scenes/big_rock.tscn" id="4_71j4m"]
 [ext_resource type="PackedScene" uid="uid://bb1xamginjy27" path="res://scenes/fish.tscn" id="4_k0juu"]
 [ext_resource type="PackedScene" uid="uid://cvmxuyikecdj0" path="res://assets/models/lake_dock.glb" id="5_71j4m"]
 [ext_resource type="PackedScene" uid="uid://s4qt08baqykk" path="res://scenes/radio.tscn" id="7_i7141"]
 [ext_resource type="PackedScene" uid="uid://cx511b2r3d43t" path="res://scenes/beer.tscn" id="8_4mrxx"]
+[ext_resource type="Script" uid="uid://dnlhdqjvnscx7" path="res://scripts/final_countdown.gd" id="10_w7kh3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_71j4m"]
 shader = ExtResource("1_4mrxx")
@@ -113,14 +114,18 @@ font_color = Color(0, 0, 0, 1)
 outline_size = 8
 outline_color = Color(0.622253, 1.0107458e-06, 3.85046e-07, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_q20xu"]
+
 [node name="World" type="Node3D" unique_id=803202408]
-script = ExtResource("1_w7kh3")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1598877520]
 environment = SubResource("Environment_wnsco")
 
 [node name="Sun" type="DirectionalLight3D" parent="." unique_id=1065809548]
 transform = Transform3D(-0.45209804, 0.86157525, -0.23085842, 1.8333646e-09, 0.2588191, 0.9659258, 0.89196813, 0.43669328, -0.11701165, 0, 0, 0)
+
+[node name="CatchEvent" type="Node" parent="Sun" unique_id=678340380]
+script = ExtResource("2_e3hyu")
 
 [node name="Player" parent="." unique_id=390882609 node_paths=PackedStringArray("camera") instance=ExtResource("1_nnsk1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -134,7 +139,7 @@ fish_scene = ExtResource("4_k0juu")
 fish_parent = NodePath("FishTetherPoint")
 
 [node name="FishTetherPoint" type="Node3D" parent="FishZone" unique_id=1560212661]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.9339542, -15)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, -15)
 
 [node name="BigRock" parent="." unique_id=1513042128 node_paths=PackedStringArray("target") instance=ExtResource("4_71j4m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 108.927155, 128, -256)
@@ -142,16 +147,16 @@ target = NodePath("../FishZone/FishTetherPoint")
 minutes_to_reach_position = 10.0
 
 [node name="Water" type="MeshInstance3D" parent="." unique_id=1678096544]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, -4.9277363, -29.057419)
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, -4.9, -29)
 cast_shadow = 0
 mesh = SubResource("BoxMesh_bssgg")
 
 [node name="Area3D" type="Area3D" parent="Water" unique_id=1950476701]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
 collision_layer = 8
 collision_mask = 6
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Water/Area3D" unique_id=943474553]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 shape = SubResource("BoxShape3D_bssgg")
 
 [node name="lake_dock" parent="." unique_id=1620997089 instance=ExtResource("5_71j4m")]
@@ -163,13 +168,16 @@ transform = Transform3D(0.43275934, 0, 0.41559517, 0, 0.6, 0, -0.41559517, 0, 0.
 [node name="Beer" parent="." unique_id=1067645362 instance=ExtResource("8_4mrxx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8620312, 0.19864732, -1.6902468)
 
-[node name="Control" type="Control" parent="." unique_id=2108062350]
+[node name="Control" type="Control" parent="." unique_id=2108062350 node_paths=PackedStringArray("big_rock", "fish_count_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("10_w7kh3")
+big_rock = NodePath("../BigRock")
+fish_count_label = NodePath("FishSum")
 
 [node name="FinalCountdownLabel" type="Label" parent="Control" unique_id=141264398]
 visible = false
@@ -188,4 +196,19 @@ grow_vertical = 2
 text = "00:00:00"
 label_settings = SubResource("LabelSettings_bssgg")
 horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FishSum" type="Label" parent="Control" unique_id=211944327]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -108.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Fish Caught: 0"
+label_settings = SubResource("LabelSettings_q20xu")
 vertical_alignment = 1
