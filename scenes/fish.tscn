@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bb1xamginjy27"]
 
 [ext_resource type="Script" uid="uid://caxggu3848ydl" path="res://scripts/fish.gd" id="1_n6yr6"]
+[ext_resource type="PackedScene" uid="uid://cx058mfyu65ly" path="res://assets/models/fish.fbx" id="2_8g0i4"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_bssgg"]
 radius = 0.15
@@ -27,6 +28,7 @@ max_swim_cooldown = 4.0
 
 [node name="CSGMesh3D" type="CSGMesh3D" parent="." unique_id=11634783]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+visible = false
 mesh = SubResource("CapsuleMesh_bssgg")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1054717601]
@@ -42,5 +44,8 @@ shape = SubResource("CylinderShape3D_erixr")
 
 [node name="FightTarget" type="Node3D" parent="." unique_id=1084813041]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
+
+[node name="fish" parent="." unique_id=1480327667 instance=ExtResource("2_8g0i4")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0.069770575)
 
 [connection signal="area_entered" from="CatchRadius" to="." method="_on_area_3d_area_entered"]

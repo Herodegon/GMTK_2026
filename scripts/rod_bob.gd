@@ -10,13 +10,14 @@ var starting_pos: Transform3D
 func _ready() -> void:
 	starting_pos = transform
 
-func _physics_process(delta: float) -> void:
-	pass
+#func _physics_process(delta: float) -> void:
+	#pass
 
 func _on_area_3d_area_entered(area: Area3D) -> void:
 	if area.get_collision_layer_value(4): # is water?
 		print("water")
 		freeze = true
+		$Plunk.play()
 		print(global_position)
 		is_reel_spinning_changed.emit(false)
 

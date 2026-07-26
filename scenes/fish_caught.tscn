@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://b5o83dqh2raqv"]
+
+[ext_resource type="Script" uid="uid://bqm3hrdt5jtsn" path="res://scripts/fish_caught.gd" id="1_ci1xb"]
+[ext_resource type="PackedScene" uid="uid://cx058mfyu65ly" path="res://assets/models/fish.fbx" id="1_y87qa"]
+
+[node name="FishCaught" type="Node3D" unique_id=2005939181]
+script = ExtResource("1_ci1xb")
+
+[node name="fish" parent="." unique_id=413977576 instance=ExtResource("1_y87qa")]
+transform = Transform3D(0.040853858, 0.014670314, -0.09008743, 0.017590584, 0.095584095, 0.023542596, 0.08956301, -0.025464956, 0.03646919, 0, 0, 0)

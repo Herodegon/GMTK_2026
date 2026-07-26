@@ -28,6 +28,7 @@ var input_buffer_timer: float = 0.0
 func _ready() -> void:
 	rod_line.set_rope_length(rest_rope_length)
 	_bob_set_rest()
+	
 	bob.is_reel_spinning_changed.connect(func(is_spinning: bool) -> void:
 		is_reel_spinning = is_spinning
 	)
@@ -42,6 +43,7 @@ func _process(delta: float) -> void:
 func _bob_set_rest() -> void:
 	bob.global_position = bob_start_position.global_position
 	bob.freeze = true
+	is_reel_spinning = false
 	bob.is_cast = false
 
 func _spin_wheel(delta: float, direction: RotationDirection) -> void:
@@ -50,12 +52,12 @@ func _spin_wheel(delta: float, direction: RotationDirection) -> void:
 
 func cast_rod() -> void:
 	if not bob.is_cast and input_buffer_timer <= 0.0:
+		$Cast.play()
 		$Animator.play("Cast")
 
 func _on_start_catch_event() -> void:
 	reel_direction = RotationDirection.COUNTER_CLOCKWISE
 	is_reel_spinning = true
-	$Animator.play("Catch")
 
 func _on_end_catch_event() -> void:
 	_animation_reel_back()
@@ -80,7 +82,6 @@ func _animation_call_cast() -> void:
 	rod_line.set_rope_length(cast_rope_length)
 	reel_direction = RotationDirection.CLOCKWISE
 	is_reel_spinning = true
-
 
 func _on_animator_animation_finished(anim_name):
 	if anim_name == "Reel":

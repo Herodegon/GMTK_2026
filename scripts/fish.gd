@@ -6,6 +6,8 @@ enum SwimState {
 	FIGHTING
 }
 
+@onready var fish = preload("res://scenes/fish_caught.tscn")
+
 @export var tether_point: Node3D = null
 @export var tether_radius: float = 4.0
 @export var combat_target_point: Node3D = null
@@ -82,6 +84,11 @@ func _on_end_catch_event() -> void:
 	_reset_to_idle()
 
 func _reset_to_idle() -> void:
+	var f = fish.instantiate()
+	f.scale = Vector3(0.25, 0.25, 0.25)
+	get_parent().call_deferred("add_child", f)
+	f.global_position = global_position
+	
 	horizontal_offset_amount = 0.0
 	swim_cooldown = 0.0
 	target_point = Vector3.ZERO

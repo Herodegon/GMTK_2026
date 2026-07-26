@@ -3,6 +3,9 @@
 [ext_resource type="Script" uid="uid://d3safe7q4nrg4" path="res://scripts/rod.gd" id="1_7w65j"]
 [ext_resource type="PackedScene" uid="uid://bjuuk5q0ofye7" path="res://scenes/rod_bob.tscn" id="2_ch35b"]
 [ext_resource type="PackedScene" uid="uid://qhoexvap4umh" path="res://scenes/rod_line.tscn" id="2_vf8jx"]
+[ext_resource type="PackedScene" uid="uid://ds24jj5mpm8dx" path="res://assets/models/rod.fbx" id="3_erixr"]
+[ext_resource type="PackedScene" uid="uid://bjvvgaf3wjc2d" path="res://assets/models/reel.fbx" id="4_1ykso"]
+[ext_resource type="AudioStream" uid="uid://fxov3hlghlc2" path="res://assets/audio/cast.ogg" id="6_lmywh"]
 
 [sub_resource type="Animation" id="Animation_3vyb7"]
 resource_name = "Cast"
@@ -211,15 +214,6 @@ _data = {
 &"Reel": SubResource("Animation_ch35b")
 }
 
-[sub_resource type="BoxMesh" id="BoxMesh_7w65j"]
-size = Vector3(0.1, 1, 0.1)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_bssgg"]
-top_radius = 0.1
-bottom_radius = 0.1
-height = 0.2
-radial_segments = 8
-
 [node name="Rod" type="Node3D" unique_id=1205497278]
 script = ExtResource("1_7w65j")
 cast_rope_length = 12.0
@@ -239,15 +233,15 @@ transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0.607154
 
 [node name="RodMesh" type="CSGMesh3D" parent="Mesh" unique_id=259422168]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("BoxMesh_7w65j")
+
+[node name="rod" parent="Mesh/RodMesh" unique_id=1842567901 instance=ExtResource("3_erixr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.16231656, -0.00506109)
 
 [node name="LineStart" type="Node3D" parent="Mesh/RodMesh" unique_id=1869645065]
 transform = Transform3D(1, 0, 0, 0, 0.8660254, -0.5, 0, 0.5, 0.8660254, 0, 0.49627796, -0.0013913512)
 
-[node name="WheelMesh" type="CSGMesh3D" parent="Mesh/RodMesh" unique_id=1697062251]
-transform = Transform3D(-4.371139e-08, -1, 4.371139e-08, 0, -4.371139e-08, -1, 1, -4.371139e-08, 1.9106855e-15, 0, -0.1, -0.1)
-rotation_edit_mode = 1
-mesh = SubResource("CylinderMesh_bssgg")
+[node name="WheelMesh" parent="Mesh/RodMesh" unique_id=1936474662 instance=ExtResource("4_1ykso")]
+transform = Transform3D(-2.1855694e-08, -0.5, 2.1855694e-08, 0, -2.1855694e-08, -0.5, 0.5, -2.1855698e-08, 0, 4.1636574e-09, -0.19525339, -0.100000024)
 
 [node name="BobRestNode" type="Node3D" parent="." unique_id=1021830666]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.607, -0.555, -1.098)
@@ -255,5 +249,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.607, -0.555, -1.098)
 [node name="RodBob" parent="BobRestNode" unique_id=402140256 instance=ExtResource("2_ch35b")]
 collision_layer = 1
 collision_mask = 1
+
+[node name="Cast" type="AudioStreamPlayer3D" parent="." unique_id=57029830]
+stream = ExtResource("6_lmywh")
 
 [connection signal="animation_finished" from="Animator" to="." method="_on_animator_animation_finished"]
