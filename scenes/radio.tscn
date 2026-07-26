@@ -5,6 +5,13 @@
 [ext_resource type="PackedScene" uid="uid://db0rlwb2nb0lf" path="res://assets/models/knob.fbx" id="3_7h80l"]
 [ext_resource type="PackedScene" uid="uid://dmqsd652abqvq" path="res://assets/models/needle.fbx" id="4_4b7o3"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yt6rh"]
+albedo_color = Color(0.12955844, 0.12955847, 0.12955844, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_wnsco"]
+material = SubResource("StandardMaterial3D_yt6rh")
+size = Vector2(0.5, 0.2)
+
 [node name="radio" type="Node3D" unique_id=425362335]
 script = ExtResource("2_ldjbc")
 
@@ -17,3 +24,18 @@ transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 0.6651191, 0.8488888
 
 [node name="needle" parent="." unique_id=799294811 instance=ExtResource("4_4b7o3")]
 transform = Transform3D(0.15, 0, 0, 0, -6.5567085e-09, -0.15, 0, 0.15, -6.5567085e-09, 0, 0.84643066, 0.37911385)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=323950014]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.44588947, 0.5172152, 0.36333066)
+mesh = SubResource("QuadMesh_wnsco")
+
+[node name="Time" type="Label3D" parent="MeshInstance3D" unique_id=156820095]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.005659938)
+modulate = Color(1, 0.40249753, 0.33396956, 1)
+outline_modulate = Color(0, 0, 0, 0)
+text = "6:30"
+
+[node name="Timer" type="Timer" parent="." unique_id=1190841685]
+wait_time = 600.0
+one_shot = true
+autostart = true
