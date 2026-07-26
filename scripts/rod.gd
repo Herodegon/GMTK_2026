@@ -55,13 +55,18 @@ func cast_rod() -> void:
 func _on_start_catch_event() -> void:
 	reel_direction = RotationDirection.COUNTER_CLOCKWISE
 	is_reel_spinning = true
-	$Animator.play_backwards("Reel")
+	$Animator.play("Catch")
 
 func _on_end_catch_event() -> void:
 	_animation_reel_back()
 	input_buffer_timer = input_buffer_time
+#
+#func _physics_process(delta):
+	#if input_buffer_timer >= 0.0:
+		#input_buffer_timer -= delta
 
 func _animation_reel_back() -> void:
+	$Animator.play_backwards("Reel")
 	bob.call_deferred("reparent", bob_start_position)
 	_bob_set_rest()
 	rod_line.set_rope_length(rest_rope_length)
@@ -75,3 +80,8 @@ func _animation_call_cast() -> void:
 	rod_line.set_rope_length(cast_rope_length)
 	reel_direction = RotationDirection.CLOCKWISE
 	is_reel_spinning = true
+
+
+func _on_animator_animation_finished(anim_name):
+	if anim_name == "Reel":
+		input_buffer_timer = 0.0
