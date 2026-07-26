@@ -9,6 +9,7 @@ signal beer_interact
 
 signal start_catch_event
 signal send_fish(fish: Node3D)
+signal remove_fish(fish: Node3D)
 signal end_catch_event
 signal win_catch_event(fish: Node3D)
 signal lose_catch_event

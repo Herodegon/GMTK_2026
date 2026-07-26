@@ -99,7 +99,7 @@ func animation_reel_big_fish(fish: Node3D) -> void:
 	reel_tween.tween_property(fish, "scale", Vector3(0.01, 0.01, 0.01), 0.7).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	reel_tween.finished.connect(func() -> void:
 		if is_instance_valid(fish):
-			fish.queue_free()
+			EventBus.remove_fish.emit(fish)
 		reel_tween = null
 	)
 
