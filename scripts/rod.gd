@@ -52,7 +52,6 @@ func _spin_wheel(delta: float, direction: RotationDirection) -> void:
 
 func cast_rod() -> void:
 	if not bob.is_cast and input_buffer_timer <= 0.0:
-		$Cast.play()
 		$Animator.play("Cast")
 
 func _on_start_catch_event() -> void:
@@ -74,6 +73,7 @@ func _animation_reel_back() -> void:
 	rod_line.set_rope_length(rest_rope_length)
 
 func _animation_call_cast() -> void:
+	$Cast.play()
 	bob.apply_central_force(cast_direction.normalized() * cast_force)
 	bob.freeze = false
 	bob.is_cast = true

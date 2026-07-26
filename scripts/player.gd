@@ -13,21 +13,38 @@ var total_caught_fish: int = 0
 var interaction: int
 enum interactions {FISH, RADIO, BEER, BAIT}
 
-var shake = true
-var shake_strength
+var shake = false
+@export var noise: FastNoiseLite
+var shake_strength: float = 0.0
+@export var shake_speed: float = 1000.0
+
+var noise_pos: float = 0.0
 
 func _ready() -> void:
 	EventBus.start_catch_event.connect(_on_start_catch_event)
 	EventBus.end_catch_event.connect(_on_end_catch_event)
 	EventBus.win_catch_event.connect(_on_win_catch_event)
 	
-	#EventBus.start_ending.connect()
+	EventBus.start_ending.connect(ending)
+
+func ending():
+	shake = true
+	var tween = get_tree().create_tween()
+	tween.tween_property(self, "shake_strength", 0.2, 90.0)
 
 func _physics_process(delta):
 	if !camera_lock:
 		camera.transform = lerp(camera.transform, target_transform, camera_speed * delta)
 	else:
 		camera.transform = lerp(camera.transform, $Up.transform, camera_speed * delta)
+	
+	if shake == true:
+		noise_pos += delta * shake_speed
+		var offset_x = noise.get_noise_2d(1, noise_pos) * shake_strength
+		var offset_y = noise.get_noise_2d(100, noise_pos) * shake_strength
+		
+		camera.h_offset = offset_x
+		camera.v_offset = offset_y
 
 func _input(event):
 	if event is InputEvent:

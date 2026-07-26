@@ -120,10 +120,7 @@ offset_left = 36.0
 offset_top = 418.0
 offset_right = 235.0
 offset_bottom = 625.0
-text = "Mash \"E\" while a fish is
-on the line to catch it.
-
-Interact - E
+text = "Interact - E
 Look Up - W
 Look Left - A
 Look Right - D"

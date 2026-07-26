@@ -3,9 +3,11 @@
 [ext_resource type="Script" uid="uid://doj4mdl4jliu" path="res://scripts/player.gd" id="1_3vyb7"]
 [ext_resource type="PackedScene" uid="uid://c585i7nr6pwh" path="res://scenes/rod.tscn" id="2_g2els"]
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_rg7ok"]
+
 [node name="Player" type="Node3D" unique_id=390882609]
 script = ExtResource("1_3vyb7")
-camera_speed = null
+noise = SubResource("FastNoiseLite_rg7ok")
 
 [node name="Up" type="Node3D" parent="." unique_id=1705405695]
 
