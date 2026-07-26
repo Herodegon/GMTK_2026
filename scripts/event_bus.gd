@@ -1,5 +1,7 @@
 extends Node
 
+signal hide_tutorial_prompt
+
 signal radio_interact
 signal radio_prompt
 

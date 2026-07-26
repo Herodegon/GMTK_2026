@@ -63,7 +63,9 @@ func _on_start_catch_event() -> void:
 func _on_end_catch_event() -> void:
 	_animation_reel_back()
 	if reel_tween: return
-	_animation_reel_back()
+	rod_line.set_rope_length(rest_rope_length)
+	bob.reparent(bob_start_position)
+	_bob_set_rest()
 	input_buffer_timer = input_buffer_time
 #
 #func _physics_process(delta):
@@ -86,7 +88,7 @@ func _animation_call_cast() -> void:
 func animation_reel_big_fish(fish: Node3D) -> void:
 	rod_line.set_rope_length(reel_rope_length)
 	reel_tween = create_tween()
-	reel_tween.tween_property(fish, "global_position", bob_start_position.global_position, 1.0)
+	reel_tween.tween_property(fish, "global_position", bob_start_position.global_position, 1.5)
 	# Detach the bob before scaling the fish to avoid inherited basis scaling
 	reel_tween.tween_callback(func() -> void:
 		rod_line.set_rope_length(rest_rope_length)

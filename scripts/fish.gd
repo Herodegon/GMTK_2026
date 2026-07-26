@@ -13,8 +13,8 @@ enum SwimState {
 @export_group("Swim Settings")
 @export var impulse_strength: float = 1.0
 @export var combat_impulse_strength: float = 5.0
-@export var combat_target_offset_amount: float = 1.0
-@export var combat_target_offset_max: float = 2.0
+@export var combat_weave_speed: float = 2.0 # how fast the fish weaves side to side
+@export var combat_target_offset_max: float = 0.2 # max sideways weave amplitude
 @export var turn_speed: float = 0.3
 @export var friction: float = 0.1
 @export var max_swim_cooldown: float = 3.0
@@ -23,7 +23,7 @@ enum SwimState {
 var target_point: Vector3 = Vector3.ZERO
 var swim_state: SwimState = SwimState.IDLE
 var velocity: float = 0.0
-var horizontal_offset_amount: float = 0.0
+var combat_weave_phase: float = 0.0
 var swim_cooldown: float = 0.0
 
 var reel_target: Node3D = null # what the fish is being pulled toward
@@ -61,11 +61,10 @@ func _physics_process(delta: float) -> void:
 				motion += reel_dir.normalized() * step
 				reel_remaining -= step
 			move_and_collide(motion)
-			# Wander the offset sideways in the fish's LOCAL frame so it steers relative to heading
-			horizontal_offset_amount += delta * randf_range(-combat_target_offset_amount, combat_target_offset_amount)
-			horizontal_offset_amount = clampf(horizontal_offset_amount, -combat_target_offset_max, combat_target_offset_max)
-			# Convert the local offset into world space using the fish's current orientation
-			var world_offset := global_transform.basis * Vector3(horizontal_offset_amount, 0.0, 0.0)
+			combat_weave_phase += delta * combat_weave_speed
+			var weave := sin(combat_weave_phase) * combat_target_offset_max
+			# Apply in the fish's LOCAL frame so the weave is relative to its heading
+			var world_offset := global_transform.basis * Vector3(weave, 0.0, 0.0)
 			target_point = combat_target_point.global_position + world_offset
 
 ## Queues a fixed pull distance toward target. Each press adds distance that is
@@ -91,8 +90,8 @@ func _on_area_3d_area_entered(area: Area3D) -> void:
 		if not bob.try_claim(self):
 			return
 		swim_state = SwimState.FIGHTING
-		global_position = bob.global_position
 		target_point = combat_target_point.global_position
+		combat_weave_phase = randf() * TAU # desync weave between fish
 		velocity = combat_impulse_strength
 		EventBus.start_catch_event.emit()
 		EventBus.send_fish.emit(self)
@@ -115,7 +114,7 @@ func _on_end_catch_event() -> void:
 	_reset_to_idle()
 
 func _reset_to_idle() -> void:
-	horizontal_offset_amount = 0.0
+	combat_weave_phase = 0.0
 	swim_cooldown = 0.0
 	target_point = Vector3.ZERO
 	reel_remaining = 0.0

@@ -7,6 +7,7 @@ extends Node3D
 
 var target_transform: Transform3D
 var camera_lock: bool = false
+var is_in_tutorial: bool = true
 
 var total_caught_fish: int = 0
 
@@ -62,6 +63,9 @@ func interact():
 		match interaction:
 			0:
 				print("fish")
+				if is_in_tutorial:
+					EventBus.hide_tutorial_prompt.emit()
+					is_in_tutorial = false
 				rod.cast_rod()
 			1:
 				print("radio")

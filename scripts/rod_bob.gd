@@ -27,7 +27,8 @@ func try_claim(fish: Node3D) -> bool:
 		return false
 	print("hookline and sinker!")
 	occupied = true
-	freeze = false
+	freeze = true
+	global_position = fish.global_position
 	call_deferred("reparent", fish)
 	$BobArea.call_deferred("set_collision_mask_value", 3, false)
 	return true

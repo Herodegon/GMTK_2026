@@ -1,6 +1,6 @@
 extends Node
 
-@export var catch_event_duration: float = 10.0
+@export var catch_event_duration: float = 7.5
 @export var pull_distance_per_press: float = 0.5 # meters the fish is reeled per press
 
 @onready var player: Node3D = get_node_or_null("../../Player")
