@@ -5,6 +5,7 @@
 
 [node name="Player" type="Node3D" unique_id=390882609]
 script = ExtResource("1_3vyb7")
+camera_speed = null
 
 [node name="Up" type="Node3D" parent="." unique_id=1705405695]
 

@@ -13,10 +13,15 @@ var total_caught_fish: int = 0
 var interaction: int
 enum interactions {FISH, RADIO, BEER, BAIT}
 
+var shake = true
+var shake_strength
+
 func _ready() -> void:
 	EventBus.start_catch_event.connect(_on_start_catch_event)
 	EventBus.end_catch_event.connect(_on_end_catch_event)
 	EventBus.win_catch_event.connect(_on_win_catch_event)
+	
+	#EventBus.start_ending.connect()
 
 func _physics_process(delta):
 	if !camera_lock:

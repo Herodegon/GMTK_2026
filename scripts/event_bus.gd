@@ -15,3 +15,5 @@ signal to_final_countdown_timer(float: float)
 signal to_final_countdown_timer_text(text: String)
 
 signal update_fish_count(count: int)
+
+signal start_ending
