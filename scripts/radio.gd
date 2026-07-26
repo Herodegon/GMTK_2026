@@ -9,7 +9,7 @@ var target_position: float = -0.6
 var time: float = 0.0
 
 var radio_stations = [
-	preload("res://assets/audio/NewsReport.mp3"),
+	preload("res://assets/audio/news.mp3"),
 	preload("res://assets/audio/Music.mp3"),
 	preload("res://assets/audio/Mlatw radio.mp3"),
 ]
