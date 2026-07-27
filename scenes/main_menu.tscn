@@ -77,18 +77,24 @@ layout_mode = 2
 
 [node name="Start" type="Button" parent="VBoxContainer/VBoxContainer" unique_id=716954271]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
+size_flags_vertical = 6
 theme = SubResource("Theme_bqqt6")
 theme_override_fonts/font = ExtResource("3_bqqt6")
 theme_override_font_sizes/font_size = 30
 text = "Start
 "
 
+[node name="Tutorial" type="Button" parent="VBoxContainer/VBoxContainer" unique_id=1628414565]
+layout_mode = 2
+size_flags_vertical = 6
+theme = SubResource("Theme_bqqt6")
+theme_override_fonts/font = ExtResource("3_bqqt6")
+theme_override_font_sizes/font_size = 30
+text = "Tutorial"
+
 [node name="Quit" type="Button" parent="VBoxContainer/VBoxContainer" unique_id=1425191028]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
+size_flags_vertical = 6
 theme_override_fonts/font = ExtResource("3_bqqt6")
 theme_override_font_sizes/font_size = 30
 text = "Quit"
@@ -108,6 +114,18 @@ metadata/_edit_lock_ = true
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1246604793]
 libraries/ = SubResource("AnimationLibrary_wu84c")
 
+[node name="Tutorial" type="Label" parent="." unique_id=1861033194]
+visible = false
+offset_left = 36.0
+offset_top = 418.0
+offset_right = 235.0
+offset_bottom = 625.0
+text = "Interact - E
+Look Up - W
+Look Left - A
+Look Right - D"
+
 [connection signal="pressed" from="VBoxContainer/VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="VBoxContainer/VBoxContainer/Tutorial" to="." method="_on_tutorial_pressed"]
 [connection signal="pressed" from="VBoxContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

@@ -11,6 +11,9 @@ var distance_to_target: float = 0.0
 
 var time_until_target_position: float = 0.0
 
+var started_ending: bool = false
+var start_fade: bool = false
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("debug_progress_time_5_percent"):
 		time_until_target_position -= minutes_to_reach_position * 0.05
@@ -34,8 +37,16 @@ func move_towards_target(delta: float) -> void:
 	else:
 		var percentage_of_time_elapsed = 1.0 - (time_until_target_position / minutes_to_reach_position)
 		transform.origin = start_position.lerp(target_position, percentage_of_time_elapsed)
-		EventBus.progress_to_target.emit(percentage_of_time_elapsed)
-
+		#EventBus.progress_to_target.emit(percentage_of_time_elapsed)
+	
+	if time_until_target_position <= 120.0 and !started_ending:
+		started_ending = true
+		EventBus.start_ending.emit()
+	
+	if time_until_target_position <= 10.0 and !start_fade:
+		start_fade = true
+		EventBus.fade_out.emit()
+	
 func update_timer_label() -> void:
 	var countdown_text: String = "%02d:%02d:%02d" % [int(time_until_target_position)/60.0, int(time_until_target_position)%60, int(time_until_target_position*100)%100]
 	if time_until_target_position <= 60.0:

@@ -10,3 +10,7 @@ func _on_quit_pressed() -> void:
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	get_tree().change_scene_to_file("res://scenes/game.tscn")
+
+
+func _on_tutorial_pressed():
+	$Tutorial.visible = !$Tutorial.visible

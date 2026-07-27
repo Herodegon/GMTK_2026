@@ -1,12 +1,7 @@
 [gd_scene format=3 uid="uid://bjuuk5q0ofye7"]
 
 [ext_resource type="Script" uid="uid://dfxbhdbmdrtkb" path="res://scripts/rod_bob.gd" id="1_eqcmi"]
-
-[sub_resource type="SphereMesh" id="SphereMesh_nevuf"]
-radius = 0.05
-height = 0.1
-radial_segments = 8
-rings = 4
+[ext_resource type="PackedScene" uid="uid://cyxs8ftuqlus1" path="res://assets/models/bob.fbx" id="2_c8s0e"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_eqcmi"]
 radius = 0.05
@@ -20,8 +15,8 @@ collision_mask = 12
 mass = 0.1
 script = ExtResource("1_eqcmi")
 
-[node name="CSGMesh3D" type="CSGMesh3D" parent="." unique_id=1615397033]
-mesh = SubResource("SphereMesh_nevuf")
+[node name="bobmesh" parent="." unique_id=1505775526 instance=ExtResource("2_c8s0e")]
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2083414487]
 shape = SubResource("SphereShape3D_eqcmi")
@@ -32,5 +27,8 @@ collision_mask = 12
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BobArea" unique_id=251857434]
 shape = SubResource("SphereShape3D_wnsco")
+
+[node name="Plunk" type="AudioStreamPlayer3D" parent="." unique_id=1085598592]
+bus = &"SFX"
 
 [connection signal="area_entered" from="BobArea" to="." method="_on_area_3d_area_entered"]
